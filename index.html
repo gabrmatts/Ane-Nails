@@ -17,7 +17,6 @@
 
 <body>
 
-    <!-- ===== HEADER ===== -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="#inicio" class="brand-logo">
@@ -50,7 +49,6 @@
         </div>
     </header>
 
-    <!-- Dock de ícones flutuante (desktop) -->
     <nav class="side-dock" aria-label="Navegação rápida">
         <a href="#inicio" class="side-dock__link is-active" aria-label="Início"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M12 3 14.2 9 20 10 15.8 14 17 20 12 17 7 20 8.2 14 4 10 9.8 9 12 3Z" stroke="currentColor"
@@ -79,7 +77,6 @@
 
     <main>
 
-        <!-- ===== HERO ===== -->
         <section class="hero" id="inicio">
             <div class="hero-overlay"></div>
 
@@ -148,7 +145,6 @@
             </div>
         </section>
 
-        <!-- ===== SOBRE ===== -->
         <section class="about" id="sobre">
             <div class="container about__grid">
                 <div class="about__visual">
@@ -197,7 +193,6 @@
             </div>
         </section>
 
-        <!-- ===== SERVIÇOS ===== -->
         <section class="services" id="servicos">
             <div class="container">
                 <div class="section-head">
@@ -292,7 +287,6 @@
             </div>
         </section>
 
-        <!-- ===== DESTAQUE ===== -->
         <section class="highlight">
             <div class="container">
                 <div class="section-head">
@@ -303,23 +297,25 @@
                 </div>
 
                 <div class="spotlight">
-                    <div class="spotlight__art" aria-hidden="true">
-                        <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="spGrad" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stop-color="#e8c4ce" />
-                                    <stop offset="100%" stop-color="#c98fa0" />
-                                </linearGradient>
-                            </defs>
-                            <rect width="640" height="380" fill="url(#spGrad)" />
-                            <path
-                                d="M170 280 C 210 150, 300 150, 340 280 C 380 400, 310 440, 250 440 C 190 440, 130 400, 170 280 Z"
-                                fill="none" stroke="#1a1416" stroke-opacity="0.18" stroke-width="1.4"
-                                transform="translate(0,-60)" />
-                            <circle cx="470" cy="120" r="80" fill="#1a1416" opacity="0.08" />
-                            <circle cx="120" cy="300" r="60" fill="#1a1416" opacity="0.08" />
-                        </svg>
+                    <div class="spotlight__slider before-after-slider">
+                        <img src="assets/images/depois.jpg" alt="Resultado Final (Depois)" class="image-after"
+                            onerror="this.closest('.before-after-slider').classList.add('ba-fallback')">
+                        <img src="assets/images/antes.jpg" alt="Unha Natural (Antes)" class="image-before"
+                            onerror="this.closest('.before-after-slider').classList.add('ba-fallback')">
+
+                        <div class="slider-handle">
+                            <div class="slider-button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M8 17L4 12L8 7M16 17L20 12L16 7" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <span class="ba-slider-tag ba-slider-tag--before">Antes</span>
+                        <span class="ba-slider-tag ba-slider-tag--after">Depois</span>
                     </div>
+                    <p class="ba-slider-hint">Arraste para o lado e veja a transformação</p>
 
                     <div class="spotlight__badges">
                         <span class="spotlight__badge spotlight__badge--dark">
@@ -347,7 +343,6 @@
             </div>
         </section>
 
-        <!-- ===== GALERIA ===== -->
         <section class="gallery" id="galeria">
             <div class="container">
                 <div class="section-head">
@@ -358,16 +353,17 @@
                 </div>
 
                 <div class="gallery__grid" id="galleryGrid">
-                    <!-- Substitua os spans internos por <img src="assets/images/trabalho-01.jpg" alt="..."> em cada .gallery__item -->
                     <button class="gallery__item gallery__item--tall" data-caption="Nail art floral">
                         <span class="gallery__placeholder">Foto 1</span>
                         <span class="gallery__caption">Nail art floral</span>
                     </button>
                     <button class="gallery__item" data-caption="Alongamento em gel">
                         <span class="gallery__placeholder">Foto 2</span>
+                        <span class="gallery__caption">Alongamento em gel</span>
                     </button>
                     <button class="gallery__item" data-caption="Francesinha moderna">
                         <span class="gallery__placeholder">Foto 3</span>
+                        <span class="gallery__caption">Francesinha moderna</span>
                     </button>
                     <button class="gallery__item gallery__item--tall" data-caption="Esmaltação nude">
                         <span class="gallery__placeholder">Foto 4</span>
@@ -375,29 +371,45 @@
                     </button>
                     <button class="gallery__item" data-caption="Nail art geométrica">
                         <span class="gallery__placeholder">Foto 5</span>
+                        <span class="gallery__caption">Nail art geométrica</span>
                     </button>
                     <button class="gallery__item" data-caption="Detalhe em dourado">
                         <span class="gallery__placeholder">Foto 6</span>
+                        <span class="gallery__caption">Detalhe em dourado</span>
                     </button>
                 </div>
 
                 <div class="gallery__cta">
-                    <a href="https://instagram.com/" target="_blank" rel="noopener"
-                        class="btn btn--outline btn--pill">Ver mais no Instagram</a>
+                    <a href="https://instagram.com/" target="_blank" rel="noopener" class="btn btn--outline btn--pill">
+                        <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                            <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.4" />
+                            <circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.4" />
+                            <circle cx="16.6" cy="7.4" r="1" fill="currentColor" />
+                        </svg>
+                        Ver mais no Instagram
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Lightbox -->
-        <div class="lightbox" id="lightbox">
+        <div class="lightbox" id="lightbox" aria-hidden="true">
             <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
+            <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Foto anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Próxima foto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
             <div class="lightbox__inner">
                 <div class="lightbox__image" id="lightboxImage"></div>
                 <p class="lightbox__caption" id="lightboxCaption"></p>
             </div>
         </div>
 
-        <!-- ===== DIFERENCIAIS ===== -->
         <section class="perks">
             <div class="container">
                 <div class="section-head">
@@ -456,7 +468,6 @@
             </div>
         </section>
 
-        <!-- ===== DEPOIMENTOS ===== -->
         <section class="testimonials">
             <div class="container">
                 <div class="section-head">
@@ -464,39 +475,56 @@
                     <h2 class="section-title">Depoimentos</h2>
                 </div>
 
-                <div class="testimonials__track" id="testimonialsTrack">
-                    <article class="testimonial-card">
-                        <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                <div class="testimonials__wrap">
+                    <button class="testimonials__arrow testimonials__arrow--prev" id="testimonialsPrev"
+                        aria-label="Depoimento anterior">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
-                        <p>Atendimento impecável, muito cuidado com cada detalhe. Saí encantada com o resultado.</p>
-                        <span class="testimonial-card__name">Camila R.</span>
-                    </article>
-                    <article class="testimonial-card">
-                        <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                    </button>
+
+                    <div class="testimonials__track" id="testimonialsTrack">
+                        <article class="testimonial-card">
+                            <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                            </svg>
+                            <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+                            <p>Atendimento impecável, muito cuidado com cada detalhe. Saí encantada com o resultado.</p>
+                            <span class="testimonial-card__name">Camila R.</span>
+                        </article>
+                        <article class="testimonial-card">
+                            <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                            </svg>
+                            <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+                            <p>Profissional super atenciosa e talentosa. Já é minha nail designer de confiança.</p>
+                            <span class="testimonial-card__name">Bianca S.</span>
+                        </article>
+                        <article class="testimonial-card">
+                            <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                            </svg>
+                            <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+                            <p>Ambiente aconchegante e trabalho impecável. Recomendo de olhos fechados.</p>
+                            <span class="testimonial-card__name">Larissa M.</span>
+                        </article>
+                    </div>
+
+                    <button class="testimonials__arrow testimonials__arrow--next" id="testimonialsNext"
+                        aria-label="Próximo depoimento">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
-                        <p>Profissional super atenciosa e talentosa. Já é minha nail designer de confiança.</p>
-                        <span class="testimonial-card__name">Bianca S.</span>
-                    </article>
-                    <article class="testimonial-card">
-                        <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
-                        </svg>
-                        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
-                        <p>Ambiente aconchegante e trabalho impecável. Recomendo de olhos fechados.</p>
-                        <span class="testimonial-card__name">Larissa M.</span>
-                    </article>
+                    </button>
                 </div>
+
+                <div class="testimonials__dots" id="testimonialsDots"></div>
             </div>
         </section>
 
-        <!-- ===== FAQ ===== -->
         <section class="faq" id="faq">
             <div class="container faq__container">
                 <div class="section-head">
@@ -506,7 +534,7 @@
 
                 <div class="faq__list">
                     <div class="faq-item">
-                        <button class="faq-item__question">
+                        <button class="faq-item__question" aria-expanded="false">
                             Quanto tempo dura o alongamento?
                             <span class="faq-item__icon"></span>
                         </button>
@@ -516,7 +544,7 @@
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-item__question">
+                        <button class="faq-item__question" aria-expanded="false">
                             Como funciona a manutenção?
                             <span class="faq-item__icon"></span>
                         </button>
@@ -526,7 +554,7 @@
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-item__question">
+                        <button class="faq-item__question" aria-expanded="false">
                             Quanto tempo dura o atendimento?
                             <span class="faq-item__icon"></span>
                         </button>
@@ -536,7 +564,7 @@
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-item__question">
+                        <button class="faq-item__question" aria-expanded="false">
                             Quais formas de pagamento são aceitas?
                             <span class="faq-item__icon"></span>
                         </button>
@@ -546,7 +574,7 @@
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-item__question">
+                        <button class="faq-item__question" aria-expanded="false">
                             Como faço para agendar?
                             <span class="faq-item__icon"></span>
                         </button>
@@ -556,7 +584,7 @@
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-item__question">
+                        <button class="faq-item__question" aria-expanded="false">
                             Preciso marcar horário?
                             <span class="faq-item__icon"></span>
                         </button>
@@ -569,7 +597,6 @@
             </div>
         </section>
 
-        <!-- ===== CTA FINAL ===== -->
         <section class="final-cta">
             <div class="container final-cta__inner">
                 <h2 class="final-cta__title">Pronta para ter unhas incríveis?</h2>
@@ -582,7 +609,6 @@
             </div>
         </section>
 
-        <!-- ===== CONTATO ===== -->
         <section class="contact" id="contato">
             <div class="container">
                 <div class="section-head">
@@ -646,7 +672,6 @@
 
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container footer__inner">
             <div class="footer__brand">
@@ -688,7 +713,6 @@
         <p class="footer__copy">© 2026 ANE NAILS. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- ===== WHATSAPP FLUTUANTE ===== -->
     <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank"
         rel="noopener" class="wa-float" aria-label="Agende seu horário pelo WhatsApp">
         <span class="wa-float__tooltip">Agende seu horário</span>
