@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANE NAILS | Adriane Medeiros — Nail Designer</title>
+    <meta name="description"
+        content="Unhas que realçam sua beleza e expressam sua personalidade. Agende seu horário com Adriane Medeiros, ANE NAILS.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Great+Vibes&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="#inicio" class="brand-logo">
+                <img src="assets/images/logo.png" alt="ANE NAILS" class="logo-img"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                <span class="brand-logo__fallback" style="display:none;">ANE NAILS</span>
+            </a>
+
+            <nav class="navbar">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#inicio" class="nav-link">Início</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#galeria" class="nav-link">Galeria</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                    <li class="nav-menu__cta">
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+                            target="_blank" rel="noopener" class="btn btn--primary btn--pill">Agendar horário</a>
+                    </li>
+                </ul>
+                <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+                    target="_blank" rel="noopener" class="btn btn--primary btn--pill btn--small nav-cta">Agendar
+                    horário</a>
+            </nav>
+
+            <div class="hamburger" id="hamburger" role="button" aria-label="Abrir menu" aria-expanded="false"
+                tabindex="0">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dock de ícones flutuante (desktop) -->
+    <nav class="side-dock" aria-label="Navegação rápida">
+        <a href="#inicio" class="side-dock__link is-active" aria-label="Início"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3 14.2 9 20 10 15.8 14 17 20 12 17 7 20 8.2 14 4 10 9.8 9 12 3Z" stroke="currentColor"
+                    stroke-width="1.3" stroke-linejoin="round" />
+            </svg></a>
+        <a href="#sobre" class="side-dock__link" aria-label="Sobre"><svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.3" />
+                <path d="M5 20c1.5-4 4-5.5 7-5.5S17.5 16 19 20" stroke="currentColor" stroke-width="1.3"
+                    stroke-linecap="round" />
+            </svg></a>
+        <a href="#servicos" class="side-dock__link" aria-label="Serviços"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 3v6M12 3v9M17 3v6M7 15c0 3 2.5 6 5 6s5-3 5-6" stroke="currentColor" stroke-width="1.3"
+                    stroke-linecap="round" />
+            </svg></a>
+        <a href="#galeria" class="side-dock__link" aria-label="Galeria"><svg viewBox="0 0 24 24" fill="none">
+                <rect x="3.5" y="5" width="17" height="14" rx="2.4" stroke="currentColor" stroke-width="1.3" />
+                <circle cx="9" cy="10.5" r="1.6" stroke="currentColor" stroke-width="1.2" />
+                <path d="M4.5 17 9 12.5l3 3 3.5-4L20 17" stroke="currentColor" stroke-width="1.2"
+                    stroke-linejoin="round" />
+            </svg></a>
+        <a href="#contato" class="side-dock__link" aria-label="Contato"><svg viewBox="0 0 24 24" fill="none">
+                <rect x="3.5" y="5.5" width="17" height="13" rx="2.2" stroke="currentColor" stroke-width="1.3" />
+                <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+            </svg></a>
+    </nav>
+
+    <main>
+
+        <!-- ===== HERO ===== -->
+        <section class="hero" id="inicio">
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <span class="hero-tag animate-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="hero-tag__icon">
+                        <path d="M12 2 13.8 9 21 12 13.8 15 12 22 10.2 15 3 12 10.2 9 12 2Z" />
+                    </svg>
+                    ANE NAILS · NAIL DESIGNER
+                </span>
+
+                <h1 class="hero-title animate-item delay-1">
+                    Unhas que realçam sua beleza<br>
+                    e expressam <span class="highlight">sua personalidade</span>
+                </h1>
+
+                <p class="hero-desc animate-item delay-2">
+                    Realce sua beleza com unhas impecáveis, feitas com cuidado, técnica e atenção a cada detalhe.
+                </p>
+
+                <div class="hero-actions animate-item delay-3">
+                    <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+                        target="_blank" rel="noopener" class="btn btn--primary btn--pill">
+                        Agendar meu horário
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn__arrow">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#galeria" class="btn btn--ghost btn--pill">Ver trabalhos</a>
+                </div>
+
+                <ul class="stats-row animate-item delay-3">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" class="stats-row__icon">
+                            <path
+                                d="M20 8.5c0-2.5-2-4.5-4.5-4.5-1.6 0-3 .8-3.5 2-.5-1.2-1.9-2-3.5-2C6 4 4 6 4 8.5c0 5 8 10.5 8 10.5s8-5.5 8-10.5Z"
+                                stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                        </svg>
+                        <strong>500+</strong><span>Clientes atendidas</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" class="stats-row__icon">
+                            <path d="M12 3 14.2 9 20 10 15.8 14 17 20 12 17 7 20 8.2 14 4 10 9.8 9 12 3Z"
+                                stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                        </svg>
+                        <strong>98%</strong><span>Satisfação</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" class="stats-row__icon">
+                            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.3" />
+                            <path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                        </svg>
+                        <strong>5+</strong><span>Anos de experiência</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" class="stats-row__icon">
+                            <circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.3" />
+                            <path d="M5 20c1.5-4 4-5.5 7-5.5S17.5 16 19 20" stroke="currentColor" stroke-width="1.3"
+                                stroke-linecap="round" />
+                        </svg>
+                        <strong>100%</strong><span>Atendimento personalizado</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== SOBRE ===== -->
+        <section class="about" id="sobre">
+            <div class="container about__grid">
+                <div class="about__visual">
+                    <div class="about__frame">
+                        <div class="about__photo-slot">
+                            <span>Foto da profissional</span>
+                        </div>
+                        <div class="about__badge">
+                            <strong>+5</strong>
+                            <span>anos de experiência</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about__text">
+                    <p class="eyebrow-plain">Sobre a profissional</p>
+                    <h2 class="section-title">Muito prazer, eu sou Adriane</h2>
+                    <p class="about__lead">Mais do que unhas bonitas, acredito que cada atendimento é uma experiência.
+                        Meu objetivo é proporcionar cuidado, beleza e autoestima através de um trabalho feito com
+                        atenção aos mínimos detalhes.</p>
+
+                    <div class="about__specs">
+                        <div class="about__spec">
+                            <span class="about__spec-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.3" />
+                                    <path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.3"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </span>
+                            <h3>Experiência</h3>
+                            <p>Anos dedicados à nail design, em constante aperfeiçoamento técnico.</p>
+                        </div>
+                        <div class="about__spec">
+                            <span class="about__spec-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 3 14.2 9 20 10 15.8 14 17 20 12 17 7 20 8.2 14 4 10 9.8 9 12 3Z"
+                                        stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            <h3>Especialidades</h3>
+                            <p>Alongamento, esmaltação em gel e nail art personalizada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERVIÇOS ===== -->
+        <section class="services" id="servicos">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow-plain">O que eu ofereço</p>
+                    <h2 class="section-title">Serviços</h2>
+                </div>
+
+                <div class="services__grid">
+
+                    <article class="service-card">
+                        <div class="service-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M7 3v6M12 3v9M17 3v6M7 15c0 3 2.5 6 5 6s5-3 5-6" stroke="currentColor"
+                                    stroke-width="1.3" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>Manicure</h3>
+                        <p>Unhas bem cuidadas, acabamento impecável e atenção a cada detalhe.</p>
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20Manicure."
+                            target="_blank" rel="noopener" class="service-card__link">Agendar &rsaquo;</a>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 21c4-4 7-7.5 7-11a7 7 0 0 0-14 0c0 3.5 3 7 7 11Z" stroke="currentColor"
+                                    stroke-width="1.3" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Pedicure</h3>
+                        <p>Cuidado completo para manter seus pés bonitos e bem tratados.</p>
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20Pedicure."
+                            target="_blank" rel="noopener" class="service-card__link">Agendar &rsaquo;</a>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M6 20 16 4l2 2-10 16H6v-2Z" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Alongamento de Unhas</h3>
+                        <p>Mais comprimento, resistência e beleza para suas unhas.</p>
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20Alongamento%20de%20Unhas."
+                            target="_blank" rel="noopener" class="service-card__link">Agendar &rsaquo;</a>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 12a8 8 0 1 1 8 8" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linecap="round" />
+                                <path d="M4 8v4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Manutenção</h3>
+                        <p>Cuidados essenciais para manter seu alongamento sempre bonito.</p>
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20Manuten%C3%A7%C3%A3o."
+                            target="_blank" rel="noopener" class="service-card__link">Agendar &rsaquo;</a>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3 14 9 20 10 15.5 14 17 20 12 17 7 20 8.5 14 4 10 10 9 12 3Z"
+                                    stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Nail Art</h3>
+                        <p>Designs personalizados para deixar suas unhas ainda mais exclusivas.</p>
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20Nail%20Art."
+                            target="_blank" rel="noopener" class="service-card__link">Agendar &rsaquo;</a>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.1"
+                                    stroke-linecap="round" opacity="0.4" />
+                                <circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.3" />
+                            </svg>
+                        </div>
+                        <h3>Esmaltação em Gel</h3>
+                        <p>Mais durabilidade, brilho e um acabamento sofisticado.</p>
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20Esmalta%C3%A7%C3%A3o%20em%20Gel."
+                            target="_blank" rel="noopener" class="service-card__link">Agendar &rsaquo;</a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DESTAQUE ===== -->
+        <section class="highlight">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow-plain">Cuidado em cada etapa</p>
+                    <h2 class="section-title">Cada detalhe importa.</h2>
+                    <p class="highlight__lead">Da escolha das cores ao acabamento final, cada unha é feita para
+                        valorizar sua beleza e refletir sua personalidade.</p>
+                </div>
+
+                <div class="spotlight">
+                    <div class="spotlight__art" aria-hidden="true">
+                        <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="spGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#e8c4ce" />
+                                    <stop offset="100%" stop-color="#c98fa0" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="640" height="380" fill="url(#spGrad)" />
+                            <path
+                                d="M170 280 C 210 150, 300 150, 340 280 C 380 400, 310 440, 250 440 C 190 440, 130 400, 170 280 Z"
+                                fill="none" stroke="#1a1416" stroke-opacity="0.18" stroke-width="1.4"
+                                transform="translate(0,-60)" />
+                            <circle cx="470" cy="120" r="80" fill="#1a1416" opacity="0.08" />
+                            <circle cx="120" cy="300" r="60" fill="#1a1416" opacity="0.08" />
+                        </svg>
+                    </div>
+
+                    <div class="spotlight__badges">
+                        <span class="spotlight__badge spotlight__badge--dark">
+                            <span class="spotlight__badge-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"
+                                        stroke="currentColor" stroke-width="1.3" />
+                                </svg>
+                            </span>
+                            <span><strong>Higiene em 1º lugar</strong><span>Materiais sempre esterilizados</span></span>
+                        </span>
+
+                        <span class="spotlight__badge spotlight__badge--light">
+                            <span class="spotlight__badge-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 3 14.2 9 20 10 15.8 14 17 20 12 17 7 20 8.2 14 4 10 9.8 9 12 3Z"
+                                        stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            <span><strong>Qualidade Premium</strong><span>Produtos selecionados</span></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GALERIA ===== -->
+        <section class="gallery" id="galeria">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow-plain">Portfólio</p>
+                    <h2 class="section-title">Meus Trabalhos</h2>
+                    <p class="section-subtitle">Confira alguns dos resultados e detalhes que fazem parte do meu
+                        trabalho.</p>
+                </div>
+
+                <div class="gallery__grid" id="galleryGrid">
+                    <!-- Substitua os spans internos por <img src="assets/images/trabalho-01.jpg" alt="..."> em cada .gallery__item -->
+                    <button class="gallery__item gallery__item--tall" data-caption="Nail art floral">
+                        <span class="gallery__placeholder">Foto 1</span>
+                        <span class="gallery__caption">Nail art floral</span>
+                    </button>
+                    <button class="gallery__item" data-caption="Alongamento em gel">
+                        <span class="gallery__placeholder">Foto 2</span>
+                    </button>
+                    <button class="gallery__item" data-caption="Francesinha moderna">
+                        <span class="gallery__placeholder">Foto 3</span>
+                    </button>
+                    <button class="gallery__item gallery__item--tall" data-caption="Esmaltação nude">
+                        <span class="gallery__placeholder">Foto 4</span>
+                        <span class="gallery__caption">Esmaltação nude</span>
+                    </button>
+                    <button class="gallery__item" data-caption="Nail art geométrica">
+                        <span class="gallery__placeholder">Foto 5</span>
+                    </button>
+                    <button class="gallery__item" data-caption="Detalhe em dourado">
+                        <span class="gallery__placeholder">Foto 6</span>
+                    </button>
+                </div>
+
+                <div class="gallery__cta">
+                    <a href="https://instagram.com/" target="_blank" rel="noopener"
+                        class="btn btn--outline btn--pill">Ver mais no Instagram</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
+            <div class="lightbox__inner">
+                <div class="lightbox__image" id="lightboxImage"></div>
+                <p class="lightbox__caption" id="lightboxCaption"></p>
+            </div>
+        </div>
+
+        <!-- ===== DIFERENCIAIS ===== -->
+        <section class="perks">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow-plain">Por que escolher a ANE NAILS</p>
+                    <h2 class="section-title">Diferenciais</h2>
+                </div>
+
+                <div class="perks__grid">
+                    <div class="perk">
+                        <span class="perk__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.3" />
+                                <path d="M5 20c1.5-4 4-5.5 7-5.5S17.5 16 19 20" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </span>
+                        <h3>Atendimento personalizado</h3>
+                        <p>Cada cliente recebe atenção especial.</p>
+                    </div>
+                    <div class="perk">
+                        <span class="perk__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3 14.2 9 20 10 15.8 14 17 20 12 17 7 20 8.2 14 4 10 9.8 9 12 3Z"
+                                    stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <h3>Produtos de qualidade</h3>
+                        <p>Utilização de materiais selecionados.</p>
+                    </div>
+                    <div class="perk">
+                        <span class="perk__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M9 3h6l1 4H8l1-4Z" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linejoin="round" />
+                                <path d="M8 7h8l-1 14H9L8 7Z" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <h3>Técnicas profissionais</h3>
+                        <p>Atualização constante e cuidado em cada procedimento.</p>
+                    </div>
+                    <div class="perk">
+                        <span class="perk__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 12a8 8 0 1 1 8 8" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linecap="round" />
+                                <path d="M4 8v4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="12" cy="12" r="1.4" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <h3>Ambiente confortável</h3>
+                        <p>Uma experiência pensada para você relaxar e aproveitar seu momento.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DEPOIMENTOS ===== -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow-plain">Quem já viveu a experiência</p>
+                    <h2 class="section-title">Depoimentos</h2>
+                </div>
+
+                <div class="testimonials__track" id="testimonialsTrack">
+                    <article class="testimonial-card">
+                        <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                        </svg>
+                        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+                        <p>Atendimento impecável, muito cuidado com cada detalhe. Saí encantada com o resultado.</p>
+                        <span class="testimonial-card__name">Camila R.</span>
+                    </article>
+                    <article class="testimonial-card">
+                        <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                        </svg>
+                        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+                        <p>Profissional super atenciosa e talentosa. Já é minha nail designer de confiança.</p>
+                        <span class="testimonial-card__name">Bianca S.</span>
+                    </article>
+                    <article class="testimonial-card">
+                        <svg class="testimonial-card__quote" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
+                        </svg>
+                        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+                        <p>Ambiente aconchegante e trabalho impecável. Recomendo de olhos fechados.</p>
+                        <span class="testimonial-card__name">Larissa M.</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FAQ ===== -->
+        <section class="faq" id="faq">
+            <div class="container faq__container">
+                <div class="section-head">
+                    <p class="eyebrow-plain">Dúvidas frequentes</p>
+                    <h2 class="section-title">Perguntas Frequentes</h2>
+                </div>
+
+                <div class="faq__list">
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            Quanto tempo dura o alongamento?
+                            <span class="faq-item__icon"></span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>Em média, o alongamento dura entre 20 e 30 dias, variando conforme o crescimento natural
+                                da unha e os cuidados diários.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            Como funciona a manutenção?
+                            <span class="faq-item__icon"></span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>A manutenção é feita a cada 15 a 21 dias para preservar a estrutura e o acabamento do
+                                alongamento.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            Quanto tempo dura o atendimento?
+                            <span class="faq-item__icon"></span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>O tempo varia de acordo com o serviço escolhido, geralmente entre 1h e 2h30 para garantir
+                                um trabalho detalhado.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            Quais formas de pagamento são aceitas?
+                            <span class="faq-item__icon"></span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>Aceito Pix, cartão de débito e crédito. Consulte condições especiais diretamente pelo
+                                WhatsApp.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            Como faço para agendar?
+                            <span class="faq-item__icon"></span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>É simples: basta clicar no botão de WhatsApp e escolher o melhor dia e horário disponível
+                                para você.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            Preciso marcar horário?
+                            <span class="faq-item__icon"></span>
+                        </button>
+                        <div class="faq-item__answer">
+                            <p>Sim, todo atendimento é feito mediante agendamento prévio, para garantir tempo e
+                                dedicação total a você.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA FINAL ===== -->
+        <section class="final-cta">
+            <div class="container final-cta__inner">
+                <h2 class="final-cta__title">Pronta para ter unhas incríveis?</h2>
+                <p class="final-cta__text">Agende seu horário e tenha uma experiência pensada especialmente para você.
+                </p>
+                <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+                    target="_blank" rel="noopener" class="btn btn--primary btn--pill btn--large">Agendar pelo
+                    WhatsApp</a>
+                <p class="final-cta__note">Atendimento mediante agendamento.</p>
+            </div>
+        </section>
+
+        <!-- ===== CONTATO ===== -->
+        <section class="contact" id="contato">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow-plain">Fale comigo</p>
+                    <h2 class="section-title">Contato</h2>
+                </div>
+
+                <div class="contact__grid">
+                    <div class="contact-card">
+                        <span class="contact-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M6.5 20 7.7 16A7 7 0 1 1 11 19.5l-4.5.5Z" stroke="currentColor"
+                                    stroke-width="1.3" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <h3>WhatsApp</h3>
+                        <p>Agende ou tire suas dúvidas diretamente pelo WhatsApp.</p>
+                        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+                            target="_blank" rel="noopener" class="btn btn--outline btn--pill btn--small">Chamar no
+                            WhatsApp</a>
+                    </div>
+                    <div class="contact-card">
+                        <span class="contact-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor"
+                                    stroke-width="1.3" />
+                                <circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.3" />
+                                <circle cx="16.6" cy="7.4" r="1" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <h3>Instagram</h3>
+                        <p>Acompanhe os trabalhos mais recentes e novidades.</p>
+                        <a href="https://instagram.com/" target="_blank" rel="noopener"
+                            class="btn btn--outline btn--pill btn--small">Seguir no Instagram</a>
+                    </div>
+                    <div class="contact-card">
+                        <span class="contact-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z" stroke="currentColor"
+                                    stroke-width="1.3" stroke-linejoin="round" />
+                                <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.3" />
+                            </svg>
+                        </span>
+                        <h3>Localização</h3>
+                        <p>Endereço disponível diretamente com a profissional, mediante agendamento.</p>
+                    </div>
+                    <div class="contact-card">
+                        <span class="contact-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.3" />
+                                <path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </span>
+                        <h3>Horários</h3>
+                        <p>Terça a sábado · 9h às 19h</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__brand">
+                <img src="assets/images/logo.png" alt="ANE NAILS" class="footer__logo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                <span class="footer__fallback" style="display:none;">ANE NAILS</span>
+                <p>Adriane Medeiros</p>
+            </div>
+
+            <nav class="footer__links">
+                <a href="#inicio">Início</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#galeria">Galeria</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+            </nav>
+
+            <div class="footer__social">
+                <span class="footer__social-label">Siga a ANE NAILS</span>
+                <div class="footer__social-icons">
+                    <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"
+                        class="footer__social-link">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.4" />
+                            <circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.4" />
+                            <circle cx="16.6" cy="7.4" r="1" fill="currentColor" />
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+                        target="_blank" rel="noopener" aria-label="WhatsApp" class="footer__social-link">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M6.5 20 7.7 16A7 7 0 1 1 11 19.5l-4.5.5Z" stroke="currentColor" stroke-width="1.4"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p class="footer__copy">© 2026 ANE NAILS. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- ===== WHATSAPP FLUTUANTE ===== -->
+    <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank"
+        rel="noopener" class="wa-float" aria-label="Agende seu horário pelo WhatsApp">
+        <span class="wa-float__tooltip">Agende seu horário</span>
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M16 3C9 3 3.3 8.6 3.3 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.9c1.9 1 4 1.6 6 1.6 7 0 12.7-5.6 12.7-12.5C28.7 8.6 23 3 16 3Z"
+                fill="currentColor" />
+            <path
+                d="M22 19.2c-.3.9-1.7 1.7-2.4 1.8-.6.1-1.4.2-2.3-.1-.5-.2-1.2-.4-2-.8-3.6-1.6-5.9-5.2-6.1-5.5-.2-.3-1.5-2-1.5-3.7 0-1.8.9-2.6 1.3-3 .3-.3.7-.4 1-.4h.7c.2 0 .5 0 .8.6.3.7 1 2.4 1.1 2.6.1.2.2.4 0 .7-.1.2-.2.4-.4.6l-.6.6c-.2.2-.4.4-.2.8.2.4 1 1.6 2.1 2.6 1.4 1.3 2.6 1.7 3 1.9.4.2.6.1.8-.1l1.2-1.4c.3-.3.5-.3.8-.2l2.3 1.1c.3.1.5.2.6.4.1.2.1.9-.2 1.8Z"
+                fill="#1a1416" />
+        </svg>
+    </a>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
