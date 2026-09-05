@@ -49,32 +49,6 @@
         </div>
     </header>
 
-    <nav class="side-dock" aria-label="Navegação rápida">
-        <a href="#inicio" class="side-dock__link is-active" aria-label="Início"><svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 3 14.2 9 20 10 15.8 14 17 20 12 17 7 20 8.2 14 4 10 9.8 9 12 3Z" stroke="currentColor"
-                    stroke-width="1.3" stroke-linejoin="round" />
-            </svg></a>
-        <a href="#sobre" class="side-dock__link" aria-label="Sobre"><svg viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.3" />
-                <path d="M5 20c1.5-4 4-5.5 7-5.5S17.5 16 19 20" stroke="currentColor" stroke-width="1.3"
-                    stroke-linecap="round" />
-            </svg></a>
-        <a href="#servicos" class="side-dock__link" aria-label="Serviços"><svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 3v6M12 3v9M17 3v6M7 15c0 3 2.5 6 5 6s5-3 5-6" stroke="currentColor" stroke-width="1.3"
-                    stroke-linecap="round" />
-            </svg></a>
-        <a href="#galeria" class="side-dock__link" aria-label="Galeria"><svg viewBox="0 0 24 24" fill="none">
-                <rect x="3.5" y="5" width="17" height="14" rx="2.4" stroke="currentColor" stroke-width="1.3" />
-                <circle cx="9" cy="10.5" r="1.6" stroke="currentColor" stroke-width="1.2" />
-                <path d="M4.5 17 9 12.5l3 3 3.5-4L20 17" stroke="currentColor" stroke-width="1.2"
-                    stroke-linejoin="round" />
-            </svg></a>
-        <a href="#contato" class="side-dock__link" aria-label="Contato"><svg viewBox="0 0 24 24" fill="none">
-                <rect x="3.5" y="5.5" width="17" height="13" rx="2.2" stroke="currentColor" stroke-width="1.3" />
-                <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
-            </svg></a>
-    </nav>
-
     <main>
 
         <section class="hero" id="inicio">
@@ -260,7 +234,7 @@
                         <div class="service-card__icon">
                             <svg viewBox="0 0 24 24" fill="none">
                                 <path d="M12 3 14 9 20 10 15.5 14 17 20 12 17 7 20 8.5 14 4 10 10 9 12 3Z"
-                                    stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                                    stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <h3>Nail Art</h3>
@@ -329,63 +303,91 @@
                         trabalho.</p>
                 </div>
 
-                <div class="gallery__filters" id="galleryFilters" role="tablist"
-                    aria-label="Filtrar galeria por categoria">
-                    <button class="gallery__filter is-active" data-filter="all" role="tab"
-                        aria-selected="true">Todos</button>
-                    <button class="gallery__filter" data-filter="nailart" role="tab" aria-selected="false">Nail
-                        Art</button>
-                    <button class="gallery__filter" data-filter="alongamento" role="tab"
-                        aria-selected="false">Alongamento</button>
-                    <button class="gallery__filter" data-filter="francesinha" role="tab"
-                        aria-selected="false">Francesinha</button>
-                    <button class="gallery__filter" data-filter="esmaltacao" role="tab"
-                        aria-selected="false">Esmaltação</button>
+                <div class="gallery-carousel">
+                    <button class="gallery-carousel__arrow gallery-carousel__arrow--prev" id="galleryPrev" aria-label="Foto anterior">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+
+                    <div class="gallery-carousel__track" id="galleryTrack">
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Nail art floral">
+                            <span class="gallery__placeholder">Foto 1</span>
+                            <span class="gallery-carousel__tag">Nail Art</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Nail art floral</span>
+                        </button>
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Alongamento em gel">
+                            <span class="gallery__placeholder">Foto 2</span>
+                            <span class="gallery-carousel__tag">Alongamento</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Alongamento em gel</span>
+                        </button>
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Francesinha moderna">
+                            <span class="gallery__placeholder">Foto 3</span>
+                            <span class="gallery-carousel__tag">Francesinha</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Francesinha moderna</span>
+                        </button>
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Esmaltação nude">
+                            <span class="gallery__placeholder">Foto 4</span>
+                            <span class="gallery-carousel__tag">Esmaltação</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Esmaltação nude</span>
+                        </button>
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Nail art geométrica">
+                            <span class="gallery__placeholder">Foto 5</span>
+                            <span class="gallery-carousel__tag">Nail Art</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Nail art geométrica</span>
+                        </button>
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Detalhe em dourado">
+                            <span class="gallery__placeholder">Foto 6</span>
+                            <span class="gallery-carousel__tag">Esmaltação</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Detalhe em dourado</span>
+                        </button>
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Francesinha com pedraria">
+                            <span class="gallery__placeholder">Foto 7</span>
+                            <span class="gallery-carousel__tag">Francesinha</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Francesinha com pedraria</span>
+                        </button>
+                        <button class="gallery__item gallery-carousel__slide" data-caption="Alongamento em fibra">
+                            <span class="gallery__placeholder">Foto 8</span>
+                            <span class="gallery-carousel__tag">Alongamento</span>
+                            <span class="gallery__zoom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8" stroke-linecap="round"/></svg>
+                            </span>
+                            <span class="gallery__caption">Alongamento em fibra</span>
+                        </button>
+                    </div>
+
+                    <button class="gallery-carousel__arrow gallery-carousel__arrow--next" id="galleryNext" aria-label="Próxima foto">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
                 </div>
 
-                <div class="gallery__grid" id="galleryGrid">
-                    <button class="gallery__item gallery__item--tall" data-caption="Nail art floral"
-                        data-category="nailart">
-                        <span class="gallery__placeholder">Foto 1</span>
-                        <span class="gallery__caption">Nail art floral</span>
-                    </button>
-                    <button class="gallery__item" data-caption="Alongamento em gel" data-category="alongamento">
-                        <span class="gallery__placeholder">Foto 2</span>
-                        <span class="gallery__caption">Alongamento em gel</span>
-                    </button>
-                    <button class="gallery__item" data-caption="Francesinha moderna" data-category="francesinha">
-                        <span class="gallery__placeholder">Foto 3</span>
-                        <span class="gallery__caption">Francesinha moderna</span>
-                    </button>
-                    <button class="gallery__item gallery__item--tall" data-caption="Esmaltação nude"
-                        data-category="esmaltacao">
-                        <span class="gallery__placeholder">Foto 4</span>
-                        <span class="gallery__caption">Esmaltação nude</span>
-                    </button>
-                    <button class="gallery__item" data-caption="Nail art geométrica" data-category="nailart">
-                        <span class="gallery__placeholder">Foto 5</span>
-                        <span class="gallery__caption">Nail art geométrica</span>
-                    </button>
-                    <button class="gallery__item" data-caption="Detalhe em dourado" data-category="esmaltacao">
-                        <span class="gallery__placeholder">Foto 6</span>
-                        <span class="gallery__caption">Detalhe em dourado</span>
-                    </button>
-                    <button class="gallery__item gallery__item--tall" data-caption="Francesinha com pedraria"
-                        data-category="francesinha">
-                        <span class="gallery__placeholder">Foto 7</span>
-                        <span class="gallery__caption">Francesinha com pedraria</span>
-                    </button>
-                    <button class="gallery__item" data-caption="Alongamento em fibra" data-category="alongamento">
-                        <span class="gallery__placeholder">Foto 8</span>
-                        <span class="gallery__caption">Alongamento em fibra</span>
-                    </button>
+                <div class="gallery-carousel__meta">
+                    <div class="gallery-carousel__dots" id="galleryDots"></div>
+                    <span class="gallery-carousel__counter" id="galleryCounter"></span>
                 </div>
-
-                <p class="gallery__empty" id="galleryEmpty" hidden>Nenhum trabalho nessa categoria ainda — em breve
-                    novidades por aqui.</p>
 
                 <div class="gallery__cta">
-                    <a href="https://instagram.com/" target="_blank" rel="noopener" class="btn btn--outline btn--pill">
+                    <a href="https://instagram.com/" target="_blank" rel="noopener"
+                        class="btn btn--outline btn--pill">
                         <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
                             <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.4" />
                             <circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.4" />
@@ -400,14 +402,10 @@
         <div class="lightbox" id="lightbox" aria-hidden="true">
             <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
             <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Foto anterior">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Próxima foto">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="lightbox__inner">
                 <div class="lightbox__image" id="lightboxImage"></div>
@@ -481,23 +479,16 @@
                 </div>
 
                 <div class="feedback">
-                    <button class="feedback__arrow feedback__arrow--prev" id="feedbackPrev"
-                        aria-label="Depoimento anterior">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                    <button class="feedback__arrow feedback__arrow--prev" id="feedbackPrev" aria-label="Depoimento anterior">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
 
                     <div class="feedback__stage" id="feedbackStage">
                         <article class="feedback__slide is-active">
                             <span class="feedback__quote-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z"/></svg>
                             </span>
-                            <p class="feedback__text">Atendimento impecável, muito cuidado com cada detalhe. Saí
-                                encantada com o resultado.</p>
+                            <p class="feedback__text">Atendimento impecável, muito cuidado com cada detalhe. Saí encantada com o resultado.</p>
                             <div class="feedback__person">
                                 <span class="feedback__avatar">CR</span>
                                 <span class="feedback__meta">
@@ -509,13 +500,9 @@
 
                         <article class="feedback__slide">
                             <span class="feedback__quote-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z"/></svg>
                             </span>
-                            <p class="feedback__text">Profissional super atenciosa e talentosa. Já é minha nail designer
-                                de confiança.</p>
+                            <p class="feedback__text">Profissional super atenciosa e talentosa. Já é minha nail designer de confiança.</p>
                             <div class="feedback__person">
                                 <span class="feedback__avatar">BS</span>
                                 <span class="feedback__meta">
@@ -527,13 +514,9 @@
 
                         <article class="feedback__slide">
                             <span class="feedback__quote-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z" />
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 7C6.5 8.2 5 10.4 5 13.3c0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L9.5 7Zm8 0c-3 1.2-4.5 3.4-4.5 6.3 0 2 1.2 3.4 3 3.4 1.6 0 2.8-1.1 2.8-2.7 0-1.4-1-2.4-2.3-2.5.4-1.6 1.7-2.9 3.2-3.6L17.5 7Z"/></svg>
                             </span>
-                            <p class="feedback__text">Ambiente aconchegante e trabalho impecável. Recomendo de olhos
-                                fechados.</p>
+                            <p class="feedback__text">Ambiente aconchegante e trabalho impecável. Recomendo de olhos fechados.</p>
                             <div class="feedback__person">
                                 <span class="feedback__avatar">LM</span>
                                 <span class="feedback__meta">
@@ -544,11 +527,8 @@
                         </article>
                     </div>
 
-                    <button class="feedback__arrow feedback__arrow--next" id="feedbackNext"
-                        aria-label="Próximo depoimento">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                    <button class="feedback__arrow feedback__arrow--next" id="feedbackNext" aria-label="Próximo depoimento">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                 </div>
 
