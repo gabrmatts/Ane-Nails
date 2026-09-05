@@ -138,12 +138,12 @@ button:focus-visible {
 }
 
 .section-head {
-    margin-bottom: 48px;
+    margin-bottom: 36px;
 }
 
 @media (min-width: 768px) {
     .section-head {
-        margin-bottom: 64px;
+        margin-bottom: 48px;
     }
 }
 
@@ -258,6 +258,13 @@ button:focus-visible {
     z-index: 100;
     padding: 20px 16px;
     transition: padding 0.4s var(--ease);
+}
+
+/* Enquanto o menu mobile fullscreen está aberto, o header (que contém o
+   hambúrguer/X) precisa ficar acima do overlay do menu (z-index 999),
+   senão o botão de fechar fica inacessível atrás dele. */
+body.nav-open .header {
+    z-index: 1000;
 }
 
 .header-container {
@@ -540,7 +547,7 @@ button:focus-visible {
     max-width: 680px;
     margin: 0 auto;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 90px;
 }
 
 .hero-tag {
@@ -598,7 +605,7 @@ button:focus-visible {
     font-weight: 300;
     line-height: 1.6;
     color: var(--neutral-light);
-    margin: 0 auto 36px;
+    margin: 0 auto 28px;
     max-width: 500px;
 }
 
@@ -607,7 +614,7 @@ button:focus-visible {
     flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
-    margin-bottom: 56px;
+    margin-bottom: 36px;
 }
 
 .stats-row {
@@ -665,13 +672,13 @@ button:focus-visible {
    ABOUT
    ============================================ */
 .about {
-    padding: 110px 0;
+    padding: clamp(64px, 10vw, 96px) 0;
     background: transparent;
 }
 
 .about__grid {
     display: grid;
-    gap: 56px;
+    gap: 40px;
 }
 
 .about__visual {
@@ -751,7 +758,7 @@ button:focus-visible {
     font-size: 1.1rem;
     color: var(--neutral-light);
     max-width: 500px;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
     font-weight: 300;
     line-height: 1.6;
 }
@@ -814,7 +821,7 @@ button:focus-visible {
     .about__grid {
         grid-template-columns: 0.9fr 1.1fr;
         align-items: center;
-        gap: 80px;
+        gap: 64px;
     }
 
     .about__specs {
@@ -826,7 +833,7 @@ button:focus-visible {
    SERVICES
    ============================================ */
 .services {
-    padding: 110px 0;
+    padding: clamp(64px, 10vw, 96px) 0;
     background: transparent;
 }
 
@@ -842,7 +849,7 @@ button:focus-visible {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-radius: var(--radius-md);
-    padding: 36px 30px;
+    padding: 28px 24px;
     box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
@@ -873,15 +880,15 @@ button:focus-visible {
 }
 
 .service-card__icon {
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: rgba(201, 143, 160, 0.15);
     color: var(--rose-soft);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     border: 1px solid rgba(201, 143, 160, 0.2);
     transition: all 0.4s var(--ease);
 }
@@ -914,7 +921,7 @@ button:focus-visible {
 }
 
 .service-card p {
-    margin: 0 0 24px;
+    margin: 0 0 16px;
     color: var(--neutral-light);
     font-size: 0.95rem;
     line-height: 1.6;
@@ -952,7 +959,7 @@ button:focus-visible {
    HIGHLIGHT & SLIDER ANTES/DEPOIS
    ============================================ */
 .highlight {
-    padding: 60px 0 120px;
+    padding: clamp(40px, 6vw, 56px) 0 clamp(64px, 10vw, 96px);
     background: transparent;
     color: var(--offwhite);
     text-align: center;
@@ -963,7 +970,7 @@ button:focus-visible {
     font-size: 1.1rem;
     font-weight: 300;
     max-width: 500px;
-    margin: 0 auto 56px;
+    margin: 0 auto 32px;
     line-height: 1.6;
 }
 
@@ -1036,9 +1043,7 @@ button:focus-visible {
 .before-after-slider.ba-fallback::after {
     content: '';
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    top: 0; bottom: 0; left: 0;
     width: var(--position);
     z-index: 2;
     background: linear-gradient(135deg, var(--rose-soft), var(--rose-deep));
@@ -1112,88 +1117,9 @@ button:focus-visible {
     text-align: center;
 }
 
-.spotlight__badges {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 24px;
-}
-
-.spotlight__badge {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 20px;
-    border-radius: var(--radius-pill);
-    font-size: 0.85rem;
-    text-align: left;
-    width: 100%;
-    transition: transform 0.3s var(--ease);
-}
-
-.spotlight__badge:hover {
-    transform: translateY(-3px);
-}
-
-.spotlight__badge strong {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 600;
-    line-height: 1.2;
-}
-
-.spotlight__badge span {
-    display: block;
-    font-size: 0.75rem;
-    opacity: 0.8;
-    margin-top: 4px;
-}
-
-.spotlight__badge--dark {
-    background: linear-gradient(135deg, rgba(26, 20, 22, 0.8), rgba(26, 20, 22, 0.6));
-    color: var(--offwhite);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-}
-
-.spotlight__badge--light {
-    background: linear-gradient(135deg, rgba(251, 248, 246, 0.15), rgba(251, 248, 246, 0.05));
-    color: var(--offwhite);
-    border: 1px solid rgba(251, 248, 246, 0.2);
-    backdrop-filter: blur(12px);
-}
-
-.spotlight__badge-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--rose-deep), var(--rose-mid));
-    color: var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-    box-shadow: 0 6px 14px rgba(201, 143, 160, 0.4);
-}
-
-.spotlight__badge-icon svg {
-    width: 16px;
-    height: 16px;
-}
-
 @media (min-width: 640px) {
     .spotlight {
         padding: 32px;
-    }
-
-    .spotlight__badges {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 20px;
-    }
-
-    .spotlight__badge {
-        flex: 1;
     }
 }
 
@@ -1201,14 +1127,44 @@ button:focus-visible {
    GALLERY
    ============================================ */
 .gallery {
-    padding: 110px 0 130px;
+    padding: clamp(64px, 10vw, 96px) 0 clamp(72px, 10vw, 100px);
     background: transparent;
+}
+
+.gallery__filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.gallery__filter {
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--neutral-light);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s var(--ease);
+}
+
+.gallery__filter:hover {
+    color: var(--offwhite);
+    border-color: rgba(201, 143, 160, 0.4);
+}
+
+.gallery__filter.is-active {
+    background: linear-gradient(135deg, var(--rose-deep), var(--rose-mid));
+    color: var(--black);
+    border-color: transparent;
 }
 
 .gallery__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 12px;
 }
 
 .gallery__item {
@@ -1223,11 +1179,22 @@ button:focus-visible {
     display: block;
     width: 100%;
     box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), opacity 0.3s var(--ease);
+}
+
+.gallery__item.is-hidden {
+    display: none;
+}
+
+.gallery__empty {
+    text-align: center;
+    color: var(--neutral-light);
+    font-size: 0.95rem;
+    padding: 40px 0;
 }
 
 .gallery__item--tall {
-    aspect-ratio: 3/4;
+    aspect-ratio: 4/5;
 }
 
 .gallery__item img {
@@ -1241,12 +1208,27 @@ button:focus-visible {
     position: absolute;
     inset: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--neutral-light);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1rem;
+    gap: 10px;
+    color: var(--neutral);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.gallery__placeholder::before {
+    content: '';
+    width: 34%;
+    max-width: 52px;
+    aspect-ratio: 1/1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 13.8 9 21 12 13.8 15 12 22 10.2 15 3 12 10.2 9 12 2Z' fill='%231a1416' fill-opacity='0.22'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .gallery__item::after {
@@ -1308,13 +1290,13 @@ button:focus-visible {
 .gallery__cta {
     display: flex;
     justify-content: center;
-    margin-top: 56px;
+    margin-top: 36px;
 }
 
 @media (min-width: 720px) {
     .gallery__grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
+        gap: 16px;
     }
 }
 
@@ -1434,7 +1416,7 @@ button:focus-visible {
    PERKS
    ============================================ */
 .perks {
-    padding: 110px 0;
+    padding: clamp(64px, 10vw, 96px) 0;
     background: var(--blush);
 }
 
@@ -1447,7 +1429,7 @@ button:focus-visible {
 .perk {
     background: var(--offwhite);
     border-radius: var(--radius-md);
-    padding: 32px 24px;
+    padding: 26px 22px;
     border: 1px solid rgba(201, 143, 160, 0.15);
     box-shadow: 0 10px 40px -20px rgba(26, 20, 22, 0.08);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1463,12 +1445,12 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--blush);
     color: var(--rose-deep);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     box-shadow: inset 0 0 0 1px rgba(201, 143, 160, 0.1);
     transition: all 0.4s var(--ease);
 }
@@ -1513,95 +1495,105 @@ button:focus-visible {
 }
 
 /* ============================================
-   TESTIMONIALS (com carrossel)
+   FEEDBACK (carrossel em destaque, um por vez)
    ============================================ */
 .testimonials {
-    padding: 110px 0;
+    padding: clamp(64px, 10vw, 96px) 0;
     background: var(--offwhite);
 }
 
-.testimonials__wrap {
+.feedback {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
+    max-width: 680px;
+    margin: 0 auto;
 }
 
-.testimonials__track {
-    display: flex;
-    gap: 24px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 24px;
-    margin: 0 -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    scroll-behavior: smooth;
+.feedback__stage {
+    position: relative;
     flex: 1;
     min-width: 0;
 }
 
-.testimonials__track::-webkit-scrollbar {
-    display: none;
-}
-
-.testimonial-card {
-    position: relative;
-    scroll-snap-align: start;
-    flex: 0 0 88%;
-    background: var(--offwhite);
-    border-radius: var(--radius-md);
-    padding: 40px 32px;
-    border-top: 4px solid var(--rose-deep);
-    box-shadow: 0 15px 40px -15px rgba(26, 20, 22, 0.12);
-    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-}
-
-.testimonial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px -10px rgba(201, 143, 160, 0.2);
-}
-
-.testimonial-card__quote {
+.feedback__slide {
     position: absolute;
-    top: 32px;
-    right: 32px;
-    width: 32px;
-    height: 32px;
-    color: var(--rose-soft);
-    opacity: 0.5;
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease);
+    text-align: center;
+    padding: 8px 4px;
 }
 
-.testimonial-card:hover .testimonial-card__quote {
+.feedback__slide.is-active {
+    position: relative;
     opacity: 1;
-    transform: scale(1.1);
+    pointer-events: auto;
 }
 
-.testimonial-card__stars {
-    color: var(--rose-deep);
-    font-size: 1.05rem;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+.feedback__quote-icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    color: var(--rose-soft);
+    margin-bottom: 12px;
 }
 
-.testimonial-card p {
+.feedback__text {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     color: var(--ink);
-    margin: 0 0 24px;
-    line-height: 1.6;
+    line-height: 1.5;
+    margin: 0 auto 28px;
+    max-width: 540px;
 }
 
-.testimonial-card__name {
-    font-size: 0.9rem;
+.feedback__person {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.feedback__avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--rose-deep), var(--rose-mid));
+    color: var(--black);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    flex: 0 0 auto;
+}
+
+.feedback__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.feedback__meta strong {
+    font-size: 0.92rem;
     font-weight: 700;
     color: var(--black);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-.testimonials__arrow {
+.feedback__stars {
+    color: var(--rose-deep);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.feedback__arrow {
     flex: 0 0 auto;
     width: 44px;
     height: 44px;
@@ -1609,32 +1601,32 @@ button:focus-visible {
     background: var(--offwhite);
     border: 1px solid rgba(26, 20, 22, 0.1);
     color: var(--black);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 10px 24px -10px rgba(26, 20, 22, 0.2);
     transition: all 0.3s var(--ease);
 }
 
-.testimonials__arrow svg {
+.feedback__arrow svg {
     width: 18px;
     height: 18px;
 }
 
-.testimonials__arrow:hover {
+.feedback__arrow:hover {
     background: var(--rose-deep);
     color: var(--offwhite);
     border-color: var(--rose-deep);
 }
 
-.testimonials__dots {
+.feedback__dots {
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 8px;
+    margin-top: 32px;
 }
 
-.testimonials__dots button {
+.feedback__dots button {
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -1643,31 +1635,19 @@ button:focus-visible {
     transition: background 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
-.testimonials__dots button.is-active {
+.feedback__dots button.is-active {
     background: var(--rose-deep);
     transform: scale(1.3);
 }
 
-@media (min-width: 720px) {
-    .testimonials__track {
-        overflow: visible;
-        margin: 0;
-        padding: 0;
+@media (max-width: 599px) {
+    .feedback {
+        gap: 6px;
     }
 
-    .testimonial-card {
-        flex: 1 1 0;
-    }
-
-    .testimonials__arrow,
-    .testimonials__dots {
-        display: none;
-    }
-}
-
-@media (max-width: 719px) {
-    .testimonials__arrow {
-        display: flex;
+    .feedback__arrow {
+        width: 36px;
+        height: 36px;
     }
 }
 
@@ -1675,7 +1655,7 @@ button:focus-visible {
    FAQ
    ============================================ */
 .faq {
-    padding: 110px 0;
+    padding: clamp(64px, 10vw, 96px) 0;
     background: var(--blush);
 }
 
@@ -1715,7 +1695,7 @@ button:focus-visible {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 24px 28px;
+    padding: 18px 22px;
     font-weight: 600;
     font-size: 1.05rem;
     color: var(--black);
@@ -1774,7 +1754,7 @@ button:focus-visible {
 
 .faq-item__answer p {
     margin: 0;
-    padding: 0 28px 24px;
+    padding: 0 22px 18px;
     color: var(--neutral);
     font-size: 0.95rem;
     line-height: 1.6;
@@ -1789,7 +1769,7 @@ button:focus-visible {
    CONTACT
    ============================================ */
 .contact {
-    padding: 110px 0;
+    padding: clamp(64px, 10vw, 96px) 0;
     background: var(--offwhite);
 }
 
@@ -1802,7 +1782,7 @@ button:focus-visible {
 .contact-card {
     background: var(--offwhite);
     border-radius: var(--radius-md);
-    padding: 32px 28px;
+    padding: 26px 24px;
     border: 1px solid rgba(26, 20, 22, 0.06);
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1818,12 +1798,12 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--blush);
     color: var(--rose-deep);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     box-shadow: inset 0 0 0 1px rgba(201, 143, 160, 0.1);
     transition: all 0.4s var(--ease);
 }
@@ -1864,7 +1844,7 @@ button:focus-visible {
    FINAL CTA
    ============================================ */
 .final-cta {
-    padding: 120px 0;
+    padding: clamp(72px, 11vw, 100px) 0;
     background: linear-gradient(160deg, var(--black) 0%, var(--ink) 60%, #4a2a37 100%);
     text-align: center;
     position: relative;
@@ -1901,7 +1881,7 @@ button:focus-visible {
 
 .final-cta__text {
     color: var(--neutral-light);
-    margin: 0 0 40px;
+    margin: 0 0 32px;
     font-size: 1.1rem;
     font-weight: 300;
     line-height: 1.6;
@@ -1913,7 +1893,7 @@ button:focus-visible {
 .footer {
     background: var(--black);
     color: var(--neutral-light);
-    padding: 70px 0 30px;
+    padding: 56px 0 24px;
 }
 
 .footer__inner {
@@ -2024,8 +2004,8 @@ button:focus-visible {
     text-align: center;
     font-size: 0.8rem;
     color: var(--neutral);
-    margin: 50px 0 0;
-    padding-top: 24px;
+    margin: 36px 0 0;
+    padding-top: 20px;
     border-top: 1px solid rgba(251, 248, 246, 0.06);
 }
 
@@ -2113,7 +2093,6 @@ button:focus-visible {
 }
 
 /* Garantir que nenhuma seção cause rolagem horizontal indevida */
-html,
-body {
+html, body {
     overflow-x: hidden;
 }

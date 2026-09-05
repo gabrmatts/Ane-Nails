@@ -7,20 +7,52 @@
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("nav-menu");
 
+  // BUGFIX: .header-container usa backdrop-filter, o que faz vários navegadores
+  // (Safari/iOS e Chrome) tratarem ele como "containing block" de elementos
+  // position:fixed. Isso prendia o menu mobile dentro da barrinha do header
+  // em vez de cobrir a tela inteira. Solução: mover o menu para o final do
+  // <body> enquanto estiver aberto no mobile, e devolver ao lugar original
+  // (dentro do header) ao fechar ou ao voltar para o desktop.
+  let navMenuAnchor = null;
+  if (navMenu && navMenu.parentNode) {
+    navMenuAnchor = document.createComment("nav-menu-anchor");
+    navMenu.parentNode.insertBefore(navMenuAnchor, navMenu);
+  }
+
+  function moveMenuToBody() {
+    if (navMenu && navMenu.parentNode !== body) {
+      body.appendChild(navMenu);
+    }
+  }
+
+  function restoreMenuPosition() {
+    if (navMenu && navMenuAnchor && navMenu.parentNode === body) {
+      navMenuAnchor.parentNode.insertBefore(navMenu, navMenuAnchor.nextSibling);
+    }
+  }
+
   function closeMenu() {
     if (!hamburger || !navMenu) return;
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
     hamburger.setAttribute("aria-expanded", "false");
     body.classList.remove("no-scroll");
+    body.classList.remove("nav-open");
+    restoreMenuPosition();
   }
 
   function toggleMenu() {
     if (!hamburger || !navMenu) return;
+    const willOpen = !navMenu.classList.contains("active");
+    if (willOpen) moveMenuToBody();
+
     const isOpen = navMenu.classList.toggle("active");
     hamburger.classList.toggle("active", isOpen);
     hamburger.setAttribute("aria-expanded", String(isOpen));
     body.classList.toggle("no-scroll", isOpen);
+    body.classList.toggle("nav-open", isOpen);
+
+    if (!isOpen) restoreMenuPosition();
   }
 
   if (hamburger && navMenu) {
@@ -33,6 +65,15 @@
     });
     navMenu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", closeMenu);
+    });
+
+    // Se a tela virar desktop com o menu mobile aberto (ex: rotação de
+    // tablet ou redimensionamento), fecha e restaura o menu no lugar certo.
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 900) {
+        if (navMenu.classList.contains("active")) closeMenu();
+        else restoreMenuPosition();
+      }
     });
   }
 
@@ -114,7 +155,7 @@
 
   /* ---------- Scroll reveal ---------- */
   const revealTargets = document.querySelectorAll(
-    ".about__grid, .section-head, .service-card, .spotlight, .gallery__item, .perk, .testimonial-card, .faq-item, .contact-card, .final-cta__inner"
+    ".about__grid, .section-head, .service-card, .spotlight, .gallery__item, .perk, .feedback, .faq-item, .contact-card, .final-cta__inner"
   );
 
   if (revealTargets.length > 0) {
@@ -156,64 +197,90 @@
     });
   });
 
-  /* ---------- Testimonials carousel (setas + dots no mobile) ---------- */
-  const testimonialsTrack = document.getElementById("testimonialsTrack");
-  const testimonialsPrev = document.getElementById("testimonialsPrev");
-  const testimonialsNext = document.getElementById("testimonialsNext");
-  const testimonialsDots = document.getElementById("testimonialsDots");
+  /* ---------- Feedback (carrossel em destaque, um por vez) ---------- */
+  const feedbackStage = document.getElementById("feedbackStage");
+  const feedbackPrev = document.getElementById("feedbackPrev");
+  const feedbackNext = document.getElementById("feedbackNext");
+  const feedbackDots = document.getElementById("feedbackDots");
 
-  if (testimonialsTrack) {
-    const cards = Array.from(testimonialsTrack.querySelectorAll(".testimonial-card"));
+  if (feedbackStage) {
+    const slides = Array.from(feedbackStage.querySelectorAll(".feedback__slide"));
+    let currentIndex = Math.max(0, slides.findIndex((s) => s.classList.contains("is-active")));
 
-    if (testimonialsDots && cards.length > 1) {
-      cards.forEach((_, i) => {
+    if (feedbackDots && slides.length > 1) {
+      slides.forEach((_, i) => {
         const dot = document.createElement("button");
         dot.type = "button";
         dot.setAttribute("aria-label", `Ir para depoimento ${i + 1}`);
-        if (i === 0) dot.classList.add("is-active");
-        dot.addEventListener("click", () => {
-          cards[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-        });
-        testimonialsDots.appendChild(dot);
+        if (i === currentIndex) dot.classList.add("is-active");
+        dot.addEventListener("click", () => showSlide(i));
+        feedbackDots.appendChild(dot);
       });
     }
 
-    function scrollByCard(direction) {
-      const card = cards[0];
-      if (!card) return;
-      const gap = 24;
-      const amount = (card.getBoundingClientRect().width + gap) * direction;
-      testimonialsTrack.scrollBy({ left: amount, behavior: "smooth" });
+    const dots = feedbackDots ? Array.from(feedbackDots.children) : [];
+
+    function showSlide(index) {
+      const total = slides.length;
+      const nextIndex = (index + total) % total;
+      if (nextIndex === currentIndex) return;
+      slides[currentIndex].classList.remove("is-active");
+      slides[nextIndex].classList.add("is-active");
+      dots.forEach((dot, i) => dot.classList.toggle("is-active", i === nextIndex));
+      currentIndex = nextIndex;
     }
 
-    if (testimonialsPrev) testimonialsPrev.addEventListener("click", () => scrollByCard(-1));
-    if (testimonialsNext) testimonialsNext.addEventListener("click", () => scrollByCard(1));
+    if (feedbackPrev) feedbackPrev.addEventListener("click", () => showSlide(currentIndex - 1));
+    if (feedbackNext) feedbackNext.addEventListener("click", () => showSlide(currentIndex + 1));
 
-    if (testimonialsDots) {
-      const dots = Array.from(testimonialsDots.children);
-      let scrollTimeout;
-      testimonialsTrack.addEventListener(
-        "scroll",
-        () => {
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            const trackRect = testimonialsTrack.getBoundingClientRect();
-            let closestIndex = 0;
-            let closestDistance = Infinity;
-            cards.forEach((card, i) => {
-              const cardRect = card.getBoundingClientRect();
-              const distance = Math.abs(cardRect.left - trackRect.left);
-              if (distance < closestDistance) {
-                closestDistance = distance;
-                closestIndex = i;
-              }
-            });
-            dots.forEach((dot, i) => dot.classList.toggle("is-active", i === closestIndex));
-          }, 100);
-        },
-        { passive: true }
-      );
-    }
+    // Swipe no mobile
+    let touchStartX = 0;
+    feedbackStage.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    feedbackStage.addEventListener(
+      "touchend",
+      (e) => {
+        const delta = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(delta) < 40) return;
+        showSlide(currentIndex + (delta < 0 ? 1 : -1));
+      },
+      { passive: true }
+    );
+  }
+
+  /* ---------- Gallery filters ---------- */
+  const galleryFilters = document.getElementById("galleryFilters");
+  const galleryGrid = document.getElementById("galleryGrid");
+  const galleryEmpty = document.getElementById("galleryEmpty");
+
+  if (galleryFilters && galleryGrid) {
+    const filterButtons = Array.from(galleryFilters.querySelectorAll(".gallery__filter"));
+    const items = Array.from(galleryGrid.querySelectorAll(".gallery__item"));
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
+
+        filterButtons.forEach((b) => {
+          b.classList.toggle("is-active", b === btn);
+          b.setAttribute("aria-selected", String(b === btn));
+        });
+
+        let visibleCount = 0;
+        items.forEach((item) => {
+          const matches = filter === "all" || item.getAttribute("data-category") === filter;
+          item.classList.toggle("is-hidden", !matches);
+          if (matches) visibleCount++;
+        });
+
+        if (galleryEmpty) galleryEmpty.hidden = visibleCount > 0;
+      });
+    });
   }
 
   /* ---------- Gallery lightbox ---------- */
