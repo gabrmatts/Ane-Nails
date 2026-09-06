@@ -513,16 +513,16 @@ body.nav-open .header {
 .hero-slide__bg {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
+    background: var(--black-soft);
     overflow: hidden;
 }
 
-.hero-slide__art {
+.hero-slide__photo {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
     animation: hero-art-pan 14s ease-in-out infinite alternate;
 }
 
@@ -536,27 +536,36 @@ body.nav-open .header {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-slide__art {
+    .hero-slide__photo {
         animation: none;
     }
 }
 
-.hero-slide__bg--1 {
-    background: radial-gradient(circle at 25% 20%, #3d2530 0%, transparent 55%),
-        radial-gradient(circle at 80% 75%, rgba(201, 143, 160, 0.35) 0%, transparent 50%),
-        linear-gradient(160deg, var(--black) 0%, var(--ink) 55%, #3d2530 100%);
+/* Tonalidade da marca por cima da foto, para manter a identidade visual
+   e garantir contraste do texto independente da foto usada */
+.hero-slide__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
 }
 
-.hero-slide__bg--2 {
-    background: radial-gradient(circle at 75% 25%, rgba(217, 167, 180, 0.35) 0%, transparent 55%),
-        radial-gradient(circle at 20% 80%, rgba(201, 143, 160, 0.3) 0%, transparent 50%),
-        linear-gradient(160deg, var(--ink) 0%, #5a2c3b 55%, var(--rose-deep) 130%);
+.hero-slide__bg--1::after {
+    background: radial-gradient(circle at 25% 20%, rgba(61, 37, 48, 0.5) 0%, transparent 55%),
+        radial-gradient(circle at 80% 75%, rgba(201, 143, 160, 0.25) 0%, transparent 50%),
+        linear-gradient(160deg, rgba(26, 20, 22, 0.75) 0%, rgba(42, 30, 34, 0.55) 55%, rgba(61, 37, 48, 0.5) 100%);
 }
 
-.hero-slide__bg--3 {
-    background: radial-gradient(circle at 30% 70%, rgba(232, 196, 206, 0.3) 0%, transparent 55%),
-        radial-gradient(circle at 85% 20%, rgba(201, 143, 160, 0.3) 0%, transparent 50%),
-        linear-gradient(160deg, var(--black) 0%, #4a2a37 60%, var(--rose-mid) 140%);
+.hero-slide__bg--2::after {
+    background: radial-gradient(circle at 75% 25%, rgba(217, 167, 180, 0.25) 0%, transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(201, 143, 160, 0.2) 0%, transparent 50%),
+        linear-gradient(160deg, rgba(42, 30, 34, 0.75) 0%, rgba(90, 44, 59, 0.55) 55%, rgba(201, 143, 160, 0.35) 130%);
+}
+
+.hero-slide__bg--3::after {
+    background: radial-gradient(circle at 30% 70%, rgba(232, 196, 206, 0.2) 0%, transparent 55%),
+        radial-gradient(circle at 85% 20%, rgba(201, 143, 160, 0.2) 0%, transparent 50%),
+        linear-gradient(160deg, rgba(26, 20, 22, 0.75) 0%, rgba(74, 42, 55, 0.55) 60%, rgba(217, 167, 180, 0.35) 140%);
 }
 
 .hero-overlay {
@@ -639,7 +648,8 @@ body.nav-open .header {
     font-family: 'Great Vibes', cursive;
     font-weight: 400;
     font-size: clamp(3rem, 10vw, 5rem);
-    line-height: 1;
+    line-height: 1.35;
+    padding-top: 0.15em;
     color: transparent;
     background: linear-gradient(100deg, var(--rose-soft), var(--rose-deep));
     -webkit-background-clip: text;
