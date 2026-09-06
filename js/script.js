@@ -135,6 +135,93 @@
     });
   });
 
+  /* ---------- Hero carousel ---------- */
+  const heroSlidesEl = document.getElementById("heroSlides");
+  const heroFill = document.getElementById("heroFill");
+  const heroPrev = document.getElementById("heroPrev");
+  const heroNext = document.getElementById("heroNext");
+  const heroSlideTitle = document.getElementById("heroSlideTitle");
+  const heroSlideDesc = document.getElementById("heroSlideDesc");
+
+  if (heroSlidesEl && heroFill && heroSlideTitle && heroSlideDesc) {
+    const heroSlideEls = Array.from(heroSlidesEl.querySelectorAll(".hero-slide"));
+    let heroIndex = Math.max(0, heroSlideEls.findIndex((s) => s.classList.contains("is-active")));
+
+    function renderHeroSlide(index) {
+      heroSlideEls.forEach((slide, i) => slide.classList.toggle("is-active", i === index));
+      const active = heroSlideEls[index];
+      heroSlideTitle.style.opacity = "0";
+      heroSlideDesc.style.opacity = "0";
+      setTimeout(() => {
+        heroSlideTitle.textContent = active.dataset.title || "";
+        heroSlideDesc.textContent = active.dataset.desc || "";
+        heroSlideTitle.style.opacity = "1";
+        heroSlideDesc.style.opacity = "1";
+      }, 250);
+      heroIndex = index;
+    }
+
+    function startHeroProgress() {
+      heroFill.classList.remove("is-animating");
+      // força reflow para reiniciar a transição de largura
+      void heroFill.offsetWidth;
+      heroFill.classList.add("is-animating");
+    }
+
+    function goToHeroSlide(index) {
+      const total = heroSlideEls.length;
+      const next = (index + total) % total;
+      renderHeroSlide(next);
+      startHeroProgress();
+    }
+
+    if (heroPrev) heroPrev.addEventListener("click", () => goToHeroSlide(heroIndex - 1));
+    if (heroNext) heroNext.addEventListener("click", () => goToHeroSlide(heroIndex + 1));
+
+    // Arrastar/swipe no hero para trocar de slide
+    let heroTouchStartX = 0;
+    const hero = document.getElementById("inicio");
+    if (hero) {
+      hero.addEventListener(
+        "touchstart",
+        (e) => {
+          heroTouchStartX = e.touches[0].clientX;
+        },
+        { passive: true }
+      );
+      hero.addEventListener(
+        "touchend",
+        (e) => {
+          const delta = e.changedTouches[0].clientX - heroTouchStartX;
+          if (Math.abs(delta) < 50) return;
+          goToHeroSlide(heroIndex + (delta < 0 ? 1 : -1));
+        },
+        { passive: true }
+      );
+
+      let heroMouseDownX = null;
+      hero.addEventListener("pointerdown", (e) => {
+        if (e.pointerType === "touch") return;
+        heroMouseDownX = e.clientX;
+      });
+      hero.addEventListener("pointerup", (e) => {
+        if (heroMouseDownX === null) return;
+        const delta = e.clientX - heroMouseDownX;
+        heroMouseDownX = null;
+        if (Math.abs(delta) < 50) return;
+        goToHeroSlide(heroIndex + (delta < 0 ? 1 : -1));
+      });
+    }
+
+    heroFill.addEventListener("transitionend", () => {
+      if (heroFill.classList.contains("is-animating")) {
+        goToHeroSlide(heroIndex + 1);
+      }
+    });
+
+    startHeroProgress();
+  }
+
   /* ---------- Hero entrance animation ---------- */
   const animatedItems = document.querySelectorAll(".animate-item");
   if (animatedItems.length > 0) {
@@ -258,9 +345,15 @@
   const galleryPrev = document.getElementById("galleryPrev");
   const galleryNext = document.getElementById("galleryNext");
   const galleryDots = document.getElementById("galleryDots");
+  const galleryCounter = document.getElementById("galleryCounter");
 
   if (galleryTrack) {
     const slides = Array.from(galleryTrack.querySelectorAll(".gallery-carousel__slide"));
+    const total = slides.length;
+
+    if (galleryCounter && total) {
+      galleryCounter.textContent = `01 / ${String(total).padStart(2, "0")}`;
+    }
 
     if (galleryDots && slides.length > 1) {
       slides.forEach((slide, i) => {
@@ -280,6 +373,9 @@
     function setCurrentSlide(index) {
       slides.forEach((slide, i) => slide.classList.toggle("is-current", i === index));
       dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+      if (galleryCounter && total) {
+        galleryCounter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+      }
     }
 
     if (slides.length) setCurrentSlide(0);
@@ -318,6 +414,51 @@
         { passive: true }
       );
     }
+
+    // Arrastar com o mouse no desktop (drag-to-scroll)
+    let isDragging = false;
+    let dragMoved = false;
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+
+    galleryTrack.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "touch") return; // touch já rola nativamente
+      isDragging = true;
+      dragMoved = false;
+      dragStartX = e.clientX;
+      dragStartScroll = galleryTrack.scrollLeft;
+      galleryTrack.classList.add("is-dragging");
+      galleryTrack.setPointerCapture(e.pointerId);
+    });
+
+    galleryTrack.addEventListener("pointermove", (e) => {
+      if (!isDragging) return;
+      const delta = e.clientX - dragStartX;
+      if (Math.abs(delta) > 4) dragMoved = true;
+      galleryTrack.scrollLeft = dragStartScroll - delta;
+    });
+
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      galleryTrack.classList.remove("is-dragging");
+    }
+    galleryTrack.addEventListener("pointerup", endDrag);
+    galleryTrack.addEventListener("pointercancel", endDrag);
+
+    // Evita abrir o lightbox se o clique foi na verdade um arraste
+    slides.forEach((slide) => {
+      slide.addEventListener(
+        "click",
+        (e) => {
+          if (dragMoved) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        },
+        true
+      );
+    });
   }
 
   /* ---------- Gallery lightbox ---------- */
