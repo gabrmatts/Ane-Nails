@@ -12,20 +12,20 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&family=Manrope:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
     <header class="header" id="header">
         <div class="header-container">
-            <a href="#inicio" class="brand-logo">
-                <img src="img/Logo Ane Nails.png" alt="ANE NAILS" class="logo-img"
+            <a href="#inicio" class="brand-logo" aria-label="ANE NAILS - Voltar ao topo">
+                <img src="img/Logo Ane Nails.png" alt="ANE NAILS Logo" class="logo-img"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
                 <span class="brand-logo__fallback" style="display:none;">ANE NAILS</span>
             </a>
 
-            <nav class="navbar">
+            <nav class="navbar" aria-label="Navegação principal">
                 <ul class="nav-menu" id="nav-menu">
                     <li><a href="#inicio" class="nav-link">Início</a></li>
                     <li><a href="#servicos" class="nav-link">Serviços</a></li>
@@ -38,8 +38,7 @@
                     </li>
                 </ul>
                 <a href="https://wa.me/5551997766028" target="_blank" rel="noopener"
-                    class="btn btn--primary btn--pill btn--small nav-cta">Agendar
-                    horário</a>
+                    class="btn btn--primary btn--pill btn--small nav-cta">Agendar</a>
             </nav>
 
             <div class="hamburger" id="hamburger" role="button" aria-label="Abrir menu" aria-expanded="false"
@@ -53,27 +52,27 @@
 
         <section class="hero" id="inicio">
             <div class="hero-slides" id="heroSlides">
-                <!-- Troque o src abaixo pela sua foto: assets/images/hero-1.jpg -->
                 <div class="hero-slide is-active" data-title="Nosso Espaço"
                     data-desc="Um ambiente aconchegante e sofisticado, pensado em cada detalhe para você relaxar do início ao fim do atendimento.">
                     <div class="hero-slide__bg hero-slide__bg--1">
-                        <img class="hero-slide__photo" src="assets/images/hero-1.jpg" alt="Espaço do estúdio ANE NAILS"
+                        <img class="hero-slide__photo" src="img/Trabalho-04.jpeg" alt="Espaço do estúdio ANE NAILS"
+                            loading="lazy"
                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&amp;w=1920&amp;auto=format&amp;fit=crop';">
                     </div>
                 </div>
-                <!-- Troque o src abaixo pela sua foto: assets/images/hero-2.jpg -->
                 <div class="hero-slide" data-title="Nail Art"
                     data-desc="Designs únicos e personalizados, do clássico ao mais ousado. Cada unha pensada como uma pequena obra de arte.">
                     <div class="hero-slide__bg hero-slide__bg--2">
                         <img class="hero-slide__photo" src="img/Trabalho-04.jpeg" alt="Nail art personalizada"
+                            loading="lazy"
                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1727199433231-346fd8101839?q=80&amp;w=1920&amp;auto=format&amp;fit=crop';">
                     </div>
                 </div>
-                <!-- Troque o src abaixo pela sua foto: assets/images/hero-3.jpg -->
                 <div class="hero-slide" data-title="Alongamento"
                     data-desc="Mais comprimento, resistência e naturalidade, com técnicas modernas para um resultado impecável e duradouro.">
                     <div class="hero-slide__bg hero-slide__bg--3">
                         <img class="hero-slide__photo" src="img/Trabalho-02.jpeg" alt="Alongamento de unhas"
+                            loading="lazy"
                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519014816548-bf5fe059798b?q=80&amp;w=1920&amp;auto=format&amp;fit=crop';">
                     </div>
                 </div>
@@ -119,7 +118,7 @@
                     <a href="#galeria" class="btn btn--ghost btn--pill">Ver trabalhos</a>
                 </div>
 
-                <ul class="stats-row animate-item delay-3">
+                <ul class="stats-row animate-item delay-3" aria-label="Estatísticas">
                     <li><strong>500+</strong><span>Clientes atendidas</span></li>
                     <li><strong>98%</strong><span>Satisfação</span></li>
                     <li><strong>5+</strong><span>Anos de experiência</span></li>
@@ -134,19 +133,23 @@
                         <div class="about__carousel" id="aboutCarousel">
                             <div class="about__carousel-track" id="aboutCarouselTrack">
                                 <figure class="about__carousel-slide is-active">
-                                    <img src="img/Foto Profissional.jpeg" alt="Trajetória de Adriane — nail art floral">
+                                    <img src="img/Foto Profissional.jpeg" alt="Adriane - Foto profissional"
+                                        loading="lazy">
                                 </figure>
                                 <figure class="about__carousel-slide">
-                                    <img src="img/trajetoria-01.jpeg" alt="Trajetória de Adriane — alongamento em gel">
+                                    <img src="img/trajetoria-01.jpeg" alt="Trabalho em alongamento em gel"
+                                        loading="lazy">
                                 </figure>
                                 <figure class="about__carousel-slide">
-                                    <img src="img/trajetoria-02.jpeg" alt="Trajetória de Adriane — francesinha moderna">
+                                    <img src="img/trajetoria-02.jpeg" alt="Trabalho em francesinha moderna"
+                                        loading="lazy">
                                 </figure>
                                 <figure class="about__carousel-slide">
-                                    <img src="img/Trabalho-04.jpeg" alt="Trajetória de Adriane — esmaltação nude">
+                                    <img src="img/Trabalho-04.jpeg" alt="Trabalho em esmaltação" loading="lazy">
                                 </figure>
                                 <figure class="about__carousel-slide">
-                                    <img src="img/trajetoria-03.jpeg" alt="Trajetória de Adriane — nail art geométrica">
+                                    <img src="img/trajetoria-03.jpeg" alt="Trabalho em nail art geométrica"
+                                        loading="lazy">
                                 </figure>
                             </div>
                             <button class="about__carousel-arrow about__carousel-arrow--prev" id="aboutCarouselPrev"
@@ -164,8 +167,8 @@
                             <div class="about__carousel-dots" id="aboutCarouselDots"></div>
                         </div>
                         <div class="about__badge">
-                            <strong>+1</strong>
-                            <span>ano de experiência</span>
+                            <strong>5+</strong>
+                            <span>anos de experiência</span>
                         </div>
                     </div>
                 </div>
@@ -173,7 +176,7 @@
                 <div class="about__text">
                     <p class="eyebrow-plain">Sobre a profissional</p>
                     <h2 class="section-title">Muito prazer, eu sou Adriane</h2>
-                    <p class="about__lead">Com 23 anos e mais de um ano de experiência, transformo a arte das unhas em
+                    <p class="about__lead">Com 23 anos e mais de 5 anos de experiência, transformo a arte das unhas em
                         uma experiência de cuidado, autoestima e exclusividade. Meu propósito é entregar um acabamento
                         impecável que valorize a sua personalidade e faça você se sentir única.</p>
 
@@ -310,8 +313,10 @@
                 <div class="spotlight">
                     <div class="spotlight__slider before-after-slider">
                         <img src="img/depois.jpeg" alt="Resultado Final (Depois)" class="image-after"
+                            loading="lazy"
                             onerror="this.closest('.before-after-slider').classList.add('ba-fallback')">
                         <img src="img/antes.jpeg" alt="Unha Natural (Antes)" class="image-before"
+                            loading="lazy"
                             onerror="this.closest('.before-after-slider').classList.add('ba-fallback')">
 
                         <div class="slider-handle">
@@ -350,7 +355,7 @@
 
                     <div class="gallery-carousel__track" id="galleryTrack">
                         <button class="gallery__item gallery-carousel__slide" data-caption="Nail art floral">
-                            <img src="img/Trabalho-01.jpeg" alt="Nail art floral">
+                            <img src="img/Trabalho-01.jpeg" alt="Nail art floral" loading="lazy">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
@@ -359,7 +364,7 @@
                             </span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Alongamento em gel">
-                            <img src="img/Trabalho-02.jpeg" alt="Alongamento em gel">
+                            <img src="img/Trabalho-02.jpeg" alt="Alongamento em gel" loading="lazy">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
@@ -368,7 +373,7 @@
                             </span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Francesinha moderna">
-                            <img src="img/Trabalho-03.jpeg" alt="Francesinha moderna">
+                            <img src="img/Trabalho-03.jpeg" alt="Francesinha moderna" loading="lazy">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
@@ -377,7 +382,7 @@
                             </span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Esmaltação nude">
-                            <img src="img/Trabalho-04.jpeg" alt="Esmaltação nude">
+                            <img src="img/Trabalho-04.jpeg" alt="Esmaltação nude" loading="lazy">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
@@ -386,7 +391,7 @@
                             </span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Nail art geométrica">
-                            <img src="img/Trabalaho-05.jpeg" alt="Nail art geométrica">
+                            <img src="img/Trabalaho-05.jpeg" alt="Nail art geométrica" loading="lazy">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
@@ -458,7 +463,7 @@
                             </svg>
                         </span>
                         <h3>Atendimento personalizado</h3>
-                        <p>Cada cliente recebe atenção especial.</p>
+                        <p>Cada cliente recebe atenção especial e cuidado individualizado.</p>
                     </div>
                     <div class="perk">
                         <span class="perk__icon">
@@ -468,7 +473,7 @@
                             </svg>
                         </span>
                         <h3>Produtos de qualidade</h3>
-                        <p>Utilização de materiais selecionados.</p>
+                        <p>Utilização de materiais premium e selecionados cuidadosamente.</p>
                     </div>
                     <div class="perk">
                         <span class="perk__icon">
@@ -480,7 +485,7 @@
                             </svg>
                         </span>
                         <h3>Técnicas profissionais</h3>
-                        <p>Atualização constante e cuidado em cada procedimento.</p>
+                        <p>Atualização constante e excelência em cada procedimento realizado.</p>
                     </div>
                     <div class="perk">
                         <span class="perk__icon">
@@ -493,7 +498,7 @@
                             </svg>
                         </span>
                         <h3>Ambiente confortável</h3>
-                        <p>Uma experiência pensada para você relaxar e aproveitar seu momento.</p>
+                        <p>Uma experiência pensada para você relaxar e aproveitar seu momento especial.</p>
                     </div>
                 </div>
             </div>
@@ -517,7 +522,8 @@
                     <div class="feedback__stage" id="feedbackStage">
                         <article class="feedback__slide is-active">
                             <div class="feedback__photo">
-                                <img src="img/depoimento-01.jpeg" alt="Trabalho aprovado por Camila R.">
+                                <img src="img/depoimento-01.jpeg" alt="Trabalho aprovado por Camila R."
+                                    loading="lazy">
                             </div>
                             <div class="feedback__person">
                                 <span class="feedback__avatar">CR</span>
@@ -530,7 +536,8 @@
 
                         <article class="feedback__slide">
                             <div class="feedback__photo">
-                                <img src="img/depoimento-02.jpeg" alt="Trabalho aprovado por Bianca S.">
+                                <img src="img/depoimento-02.jpeg" alt="Trabalho aprovado por Bianca S."
+                                    loading="lazy">
                             </div>
                             <div class="feedback__person">
                                 <span class="feedback__avatar">BS</span>
@@ -543,7 +550,8 @@
 
                         <article class="feedback__slide">
                             <div class="feedback__photo">
-                                <img src="img/depoimento-03.jpeg" alt="Trabalho aprovado por Larissa M.">
+                                <img src="img/depoimento-03.jpeg" alt="Trabalho aprovado por Larissa M."
+                                    loading="lazy">
                             </div>
                             <div class="feedback__person">
                                 <span class="feedback__avatar">LM</span>
@@ -556,7 +564,8 @@
 
                         <article class="feedback__slide">
                             <div class="feedback__photo">
-                                <img src="img/depoimento-04.jpeg" alt="Trabalho aprovado por Juliana P.">
+                                <img src="img/depoimento-04.jpeg" alt="Trabalho aprovado por Juliana P."
+                                    loading="lazy">
                             </div>
                             <div class="feedback__person">
                                 <span class="feedback__avatar">JP</span>
@@ -595,7 +604,7 @@
                         </button>
                         <div class="faq-item__answer">
                             <p>Em média, o alongamento dura entre 20 e 30 dias, variando conforme o crescimento natural
-                                da unha e os cuidados diários.</p>
+                                da unha e os cuidados diários que você dispensa.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -605,7 +614,7 @@
                         </button>
                         <div class="faq-item__answer">
                             <p>A manutenção é feita a cada 15 a 21 dias para preservar a estrutura e o acabamento do
-                                alongamento.</p>
+                                alongamento em perfeito estado.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -615,7 +624,7 @@
                         </button>
                         <div class="faq-item__answer">
                             <p>O tempo varia de acordo com o serviço escolhido, geralmente entre 1h e 2h30 para garantir
-                                um trabalho detalhado.</p>
+                                um trabalho detalhado e com qualidade.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -682,8 +691,7 @@
                         <h3>WhatsApp</h3>
                         <p>Agende ou tire suas dúvidas diretamente pelo WhatsApp.</p>
                         <a href="https://wa.me/5551997766028" target="_blank" rel="noopener"
-                            class="btn btn--outline btn--pill btn--small">Chamar no
-                            WhatsApp</a>
+                            class="btn btn--outline btn--pill btn--small">Chamar no WhatsApp</a>
                     </div>
                     <div class="contact-card">
                         <span class="contact-card__icon">
@@ -696,7 +704,7 @@
                         </span>
                         <h3>Instagram</h3>
                         <p>Acompanhe os trabalhos mais recentes e novidades.</p>
-                        <a href="https://instagram.com/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/nailsane_sz/" target="_blank" rel="noopener"
                             class="btn btn--outline btn--pill btn--small">Seguir no Instagram</a>
                     </div>
                     <div class="contact-card">
@@ -730,13 +738,13 @@
     <footer class="footer">
         <div class="container footer__inner">
             <div class="footer__brand">
-                <img src="img/Logo Ane Nails.png" alt="ANE NAILS" class="footer__logo"
+                <img src="img/Logo Ane Nails.png" alt="ANE NAILS Logo" class="footer__logo"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
                 <span class="footer__fallback" style="display:none;">ANE NAILS</span>
                 <p>Adriane Medeiros</p>
             </div>
 
-            <nav class="footer__links">
+            <nav class="footer__links" aria-label="Navegação do rodapé">
                 <a href="#inicio">Início</a>
                 <a href="#servicos">Serviços</a>
                 <a href="#galeria">Galeria</a>

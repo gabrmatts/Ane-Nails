@@ -7,12 +7,6 @@
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("nav-menu");
 
-  // BUGFIX: .header-container usa backdrop-filter, o que faz vários navegadores
-  // (Safari/iOS e Chrome) tratarem ele como "containing block" de elementos
-  // position:fixed. Isso prendia o menu mobile dentro da barrinha do header
-  // em vez de cobrir a tela inteira. Solução: mover o menu para o final do
-  // <body> enquanto estiver aberto no mobile, e devolver ao lugar original
-  // (dentro do header) ao fechar ou ao voltar para o desktop.
   let navMenuAnchor = null;
   if (navMenu && navMenu.parentNode) {
     navMenuAnchor = document.createComment("nav-menu-anchor");
@@ -67,8 +61,6 @@
       link.addEventListener("click", closeMenu);
     });
 
-    // Se a tela virar desktop com o menu mobile aberto (ex: rotação de
-    // tablet ou redimensionamento), fecha e restaura o menu no lugar certo.
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 900) {
         if (navMenu.classList.contains("active")) closeMenu();
@@ -157,13 +149,12 @@
         heroSlideDesc.textContent = active.dataset.desc || "";
         heroSlideTitle.style.opacity = "1";
         heroSlideDesc.style.opacity = "1";
-      }, 250);
+      }, 280);
       heroIndex = index;
     }
 
     function startHeroProgress() {
       heroFill.classList.remove("is-animating");
-      // força reflow para reiniciar a transição de largura
       void heroFill.offsetWidth;
       heroFill.classList.add("is-animating");
     }
@@ -178,7 +169,6 @@
     if (heroPrev) heroPrev.addEventListener("click", () => goToHeroSlide(heroIndex - 1));
     if (heroNext) heroNext.addEventListener("click", () => goToHeroSlide(heroIndex + 1));
 
-    // Arrastar/swipe no hero para trocar de slide
     let heroTouchStartX = 0;
     const hero = document.getElementById("inicio");
     if (hero) {
@@ -257,7 +247,7 @@
       aboutTimer = setInterval(() => {
         const total = aboutSlides.length;
         renderAboutSlide((aboutIndex + 1) % total);
-      }, 4200);
+      }, 4500);
     }
 
     function goToAboutSlide(index) {
@@ -269,7 +259,6 @@
     if (aboutPrevBtn) aboutPrevBtn.addEventListener("click", () => goToAboutSlide(aboutIndex - 1));
     if (aboutNextBtn) aboutNextBtn.addEventListener("click", () => goToAboutSlide(aboutIndex + 1));
 
-    // Swipe no mobile
     let aboutTouchStartX = 0;
     aboutTrack.addEventListener(
       "touchstart",
@@ -296,7 +285,7 @@
   if (animatedItems.length > 0) {
     setTimeout(() => {
       animatedItems.forEach((el) => el.classList.add("is-visible"));
-    }, 150);
+    }, 160);
   }
 
   /* ---------- Header background on scroll ---------- */
@@ -326,7 +315,7 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.13, rootMargin: "0px 0px -45px 0px" }
     );
 
     revealTargets.forEach((el) => observer.observe(el));
@@ -353,7 +342,7 @@
     });
   });
 
-  /* ---------- Feedback (carrossel em destaque, um por vez) ---------- */
+  /* ---------- Feedback (carrossel em destaque) ---------- */
   const feedbackStage = document.getElementById("feedbackStage");
   const feedbackPrev = document.getElementById("feedbackPrev");
   const feedbackNext = document.getElementById("feedbackNext");
@@ -389,7 +378,6 @@
     if (feedbackPrev) feedbackPrev.addEventListener("click", () => showSlide(currentIndex - 1));
     if (feedbackNext) feedbackNext.addEventListener("click", () => showSlide(currentIndex + 1));
 
-    // Swipe no mobile
     let touchStartX = 0;
     feedbackStage.addEventListener(
       "touchstart",
@@ -452,7 +440,7 @@
     function scrollByStep(direction) {
       const slide = slides[0];
       if (!slide) return;
-      const gap = 14;
+      const gap = 16;
       const amount = (slide.getBoundingClientRect().width + gap) * direction;
       galleryTrack.scrollBy({ left: amount, behavior: "smooth" });
     }
@@ -478,20 +466,19 @@
               }
             });
             setCurrentSlide(closestIndex);
-          }, 100);
+          }, 110);
         },
         { passive: true }
       );
     }
 
-    // Arrastar com o mouse no desktop (drag-to-scroll)
     let isDragging = false;
     let dragMoved = false;
     let dragStartX = 0;
     let dragStartScroll = 0;
 
     galleryTrack.addEventListener("pointerdown", (e) => {
-      if (e.pointerType === "touch") return; // touch já rola nativamente
+      if (e.pointerType === "touch") return;
       isDragging = true;
       dragMoved = false;
       dragStartX = e.clientX;
@@ -503,7 +490,7 @@
     galleryTrack.addEventListener("pointermove", (e) => {
       if (!isDragging) return;
       const delta = e.clientX - dragStartX;
-      if (Math.abs(delta) > 4) dragMoved = true;
+      if (Math.abs(delta) > 5) dragMoved = true;
       galleryTrack.scrollLeft = dragStartScroll - delta;
     });
 
@@ -515,7 +502,6 @@
     galleryTrack.addEventListener("pointerup", endDrag);
     galleryTrack.addEventListener("pointercancel", endDrag);
 
-    // Evita abrir o lightbox se o clique foi na verdade um arraste
     slides.forEach((slide) => {
       slide.addEventListener(
         "click",
