@@ -131,11 +131,40 @@
             <div class="container about__grid">
                 <div class="about__visual">
                     <div class="about__frame">
-                        <div class="about__photo-slot">
-                            <img src="img/Foto Profissional.jpeg" alt="foto-profissional">
+                        <div class="about__carousel" id="aboutCarousel">
+                            <div class="about__carousel-track" id="aboutCarouselTrack">
+                                <figure class="about__carousel-slide is-active">
+                                    <img src="img/Foto Profissional.jpeg" alt="Trajetória de Adriane — nail art floral">
+                                </figure>
+                                <figure class="about__carousel-slide">
+                                    <img src="img/Trabalho-02.jpeg" alt="Trajetória de Adriane — alongamento em gel">
+                                </figure>
+                                <figure class="about__carousel-slide">
+                                    <img src="img/Trabalho-03.jpeg" alt="Trajetória de Adriane — francesinha moderna">
+                                </figure>
+                                <figure class="about__carousel-slide">
+                                    <img src="img/Trabalho-04.jpeg" alt="Trajetória de Adriane — esmaltação nude">
+                                </figure>
+                                <figure class="about__carousel-slide">
+                                    <img src="img/Trabalaho-05.jpeg" alt="Trajetória de Adriane — nail art geométrica">
+                                </figure>
+                            </div>
+                            <button class="about__carousel-arrow about__carousel-arrow--prev" id="aboutCarouselPrev"
+                                aria-label="Foto anterior da trajetória">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <button class="about__carousel-arrow about__carousel-arrow--next" id="aboutCarouselNext"
+                                aria-label="Próxima foto da trajetória">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="about__carousel-dots" id="aboutCarouselDots"></div>
                         </div>
                         <div class="about__badge">
-                            <strong>+5</strong>
+                            <strong>+1</strong>
                             <span>anos de experiência</span>
                         </div>
                     </div>
@@ -321,92 +350,49 @@
 
                     <div class="gallery-carousel__track" id="galleryTrack">
                         <button class="gallery__item gallery-carousel__slide" data-caption="Nail art floral">
-                            <img src="img/Trabalho-01.jpeg" alt="">
-                            <span class="gallery-carousel__tag">Nail Art</span>
+                            <img src="img/Trabalho-01.jpeg" alt="Nail art floral">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
                                     <path d="m20 20-3.8-3.8" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <span class="gallery__caption">Nail art floral</span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Alongamento em gel">
-                           <img src="img/Trabalho-02.jpeg" alt="">
-                            <span class="gallery-carousel__tag">Alongamento</span>
+                            <img src="img/Trabalho-02.jpeg" alt="Alongamento em gel">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
                                     <path d="m20 20-3.8-3.8" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <span class="gallery__caption">Alongamento em gel</span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Francesinha moderna">
-                            <img src="img/Trabalho-03.jpeg" alt="">
-                            <span class="gallery-carousel__tag">Francesinha</span>
+                            <img src="img/Trabalho-03.jpeg" alt="Francesinha moderna">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
                                     <path d="m20 20-3.8-3.8" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <span class="gallery__caption">Francesinha moderna</span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Esmaltação nude">
-                            <img src="img/Trabalho-04.jpeg" alt="">
-                            <span class="gallery-carousel__tag">Esmaltação</span>
+                            <img src="img/Trabalho-04.jpeg" alt="Esmaltação nude">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
                                     <path d="m20 20-3.8-3.8" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <span class="gallery__caption">Esmaltação nude</span>
                         </button>
                         <button class="gallery__item gallery-carousel__slide" data-caption="Nail art geométrica">
-                            <img src="img/Trabalaho-05.jpeg" alt="">
-                            <span class="gallery-carousel__tag">Nail Art</span>
+                            <img src="img/Trabalaho-05.jpeg" alt="Nail art geométrica">
                             <span class="gallery__zoom" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <circle cx="11" cy="11" r="6.5" />
                                     <path d="m20 20-3.8-3.8" stroke-linecap="round" />
                                 </svg>
                             </span>
-                            <span class="gallery__caption">Nail art geométrica</span>
-                        </button>
-                        <button class="gallery__item gallery-carousel__slide" data-caption="Detalhe em dourado">
-                            <span class="gallery__placeholder">Foto 6</span>
-                            <span class="gallery-carousel__tag">Esmaltação</span>
-                            <span class="gallery__zoom" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                                    <circle cx="11" cy="11" r="6.5" />
-                                    <path d="m20 20-3.8-3.8" stroke-linecap="round" />
-                                </svg>
-                            </span>
-                            <span class="gallery__caption">Detalhe em dourado</span>
-                        </button>
-                        <button class="gallery__item gallery-carousel__slide" data-caption="Francesinha com pedraria">
-                            <span class="gallery__placeholder">Foto 7</span>
-                            <span class="gallery-carousel__tag">Francesinha</span>
-                            <span class="gallery__zoom" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                                    <circle cx="11" cy="11" r="6.5" />
-                                    <path d="m20 20-3.8-3.8" stroke-linecap="round" />
-                                </svg>
-                            </span>
-                            <span class="gallery__caption">Francesinha com pedraria</span>
-                        </button>
-                        <button class="gallery__item gallery-carousel__slide" data-caption="Alongamento em fibra">
-                            <span class="gallery__placeholder">Foto 8</span>
-                            <span class="gallery-carousel__tag">Alongamento</span>
-                            <span class="gallery__zoom" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                                    <circle cx="11" cy="11" r="6.5" />
-                                    <path d="m20 20-3.8-3.8" stroke-linecap="round" />
-                                </svg>
-                            </span>
-                            <span class="gallery__caption">Alongamento em fibra</span>
                         </button>
                     </div>
 

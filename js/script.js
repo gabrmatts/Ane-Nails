@@ -222,6 +222,75 @@
     startHeroProgress();
   }
 
+  /* ---------- About (carrossel de trajetória) ---------- */
+  const aboutTrack = document.getElementById("aboutCarouselTrack");
+  const aboutDotsWrap = document.getElementById("aboutCarouselDots");
+  const aboutPrevBtn = document.getElementById("aboutCarouselPrev");
+  const aboutNextBtn = document.getElementById("aboutCarouselNext");
+
+  if (aboutTrack) {
+    const aboutSlides = Array.from(aboutTrack.querySelectorAll(".about__carousel-slide"));
+    let aboutIndex = Math.max(0, aboutSlides.findIndex((s) => s.classList.contains("is-active")));
+    let aboutTimer = null;
+
+    if (aboutDotsWrap && aboutSlides.length > 1) {
+      aboutSlides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.setAttribute("aria-label", `Ir para foto ${i + 1} da trajetória`);
+        if (i === aboutIndex) dot.classList.add("is-active");
+        dot.addEventListener("click", () => goToAboutSlide(i));
+        aboutDotsWrap.appendChild(dot);
+      });
+    }
+    const aboutDots = aboutDotsWrap ? Array.from(aboutDotsWrap.children) : [];
+
+    function renderAboutSlide(index) {
+      aboutSlides.forEach((slide, i) => slide.classList.toggle("is-active", i === index));
+      aboutDots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+      aboutIndex = index;
+    }
+
+    function restartAboutAutoplay() {
+      if (aboutSlides.length < 2) return;
+      if (aboutTimer) clearInterval(aboutTimer);
+      aboutTimer = setInterval(() => {
+        const total = aboutSlides.length;
+        renderAboutSlide((aboutIndex + 1) % total);
+      }, 4200);
+    }
+
+    function goToAboutSlide(index) {
+      const total = aboutSlides.length;
+      renderAboutSlide((index + total) % total);
+      restartAboutAutoplay();
+    }
+
+    if (aboutPrevBtn) aboutPrevBtn.addEventListener("click", () => goToAboutSlide(aboutIndex - 1));
+    if (aboutNextBtn) aboutNextBtn.addEventListener("click", () => goToAboutSlide(aboutIndex + 1));
+
+    // Swipe no mobile
+    let aboutTouchStartX = 0;
+    aboutTrack.addEventListener(
+      "touchstart",
+      (e) => {
+        aboutTouchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    aboutTrack.addEventListener(
+      "touchend",
+      (e) => {
+        const delta = e.changedTouches[0].clientX - aboutTouchStartX;
+        if (Math.abs(delta) < 40) return;
+        goToAboutSlide(aboutIndex + (delta < 0 ? 1 : -1));
+      },
+      { passive: true }
+    );
+
+    restartAboutAutoplay();
+  }
+
   /* ---------- Hero entrance animation ---------- */
   const animatedItems = document.querySelectorAll(".animate-item");
   if (animatedItems.length > 0) {
