@@ -2,6 +2,8 @@
   "use strict";
 
   const body = document.body;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pad2 = (n) => String(n).padStart(2, "0");
 
   /* ---------- Mobile menu ---------- */
   const hamburger = document.getElementById("hamburger");
@@ -397,7 +399,16 @@
     );
   }
 
-  /* ---------- Gallery carousel ---------- */
+  /* ============================================================
+     GALERIA — carrossel (v3)
+     - visual limpo, sem legendas nem numeração
+     - setas com estado desabilitado, esmaecimento nas bordas
+     - contador/pontos corretos até a última foto
+     - arrastar com mouse (inércia + encaixe na foto mais próxima)
+     - teclado (setas, Home, End), autoplay suave com pausas
+     ============================================================ */
+  let gallerySyncTo = null; // usado pelo lightbox para sincronizar o carrossel
+
   const galleryTrack = document.getElementById("galleryTrack");
   const galleryPrev = document.getElementById("galleryPrev");
   const galleryNext = document.getElementById("galleryNext");
@@ -405,118 +416,351 @@
   const galleryCounter = document.getElementById("galleryCounter");
 
   if (galleryTrack) {
+    const galleryRoot = galleryTrack.closest(".gallery-carousel");
     const slides = Array.from(galleryTrack.querySelectorAll(".gallery-carousel__slide"));
     const total = slides.length;
+    const EDGE = 4; // tolerância (px) para considerar início/fim
 
-    if (galleryCounter && total) {
-      galleryCounter.textContent = `01 / ${String(total).padStart(2, "0")}`;
-    }
+    /* Acessibilidade do carrossel */
+    galleryTrack.setAttribute("role", "region");
+    galleryTrack.setAttribute("aria-roledescription", "carrossel");
+    galleryTrack.setAttribute("aria-label", "Galeria de trabalhos");
 
-    if (galleryDots && slides.length > 1) {
-      slides.forEach((slide, i) => {
+    /* Rótulo acessível em cada foto (sem texto visível) */
+    slides.forEach((slide, i) => {
+      const text = slide.getAttribute("data-caption") || "Foto";
+      slide.setAttribute("aria-label", `${text} — foto ${i + 1} de ${total}. Ampliar`);
+    });
+
+    /* Pontinhos */
+    if (galleryDots && total > 1) {
+      slides.forEach((_, i) => {
         const dot = document.createElement("button");
         dot.type = "button";
         dot.setAttribute("aria-label", `Ir para foto ${i + 1}`);
-        if (i === 0) dot.classList.add("is-active");
         dot.addEventListener("click", () => {
-          slide.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+          scrollToIndex(i);
+          restartAutoplay();
         });
         galleryDots.appendChild(dot);
       });
     }
-
     const dots = galleryDots ? Array.from(galleryDots.children) : [];
 
-    function setCurrentSlide(index) {
-      slides.forEach((slide, i) => slide.classList.toggle("is-current", i === index));
-      dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
-      if (galleryCounter && total) {
-        galleryCounter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+    /* Helpers de posição */
+    function slideOffset(i) {
+      const trackRect = galleryTrack.getBoundingClientRect();
+      return slides[i].getBoundingClientRect().left - trackRect.left + galleryTrack.scrollLeft;
+    }
+
+    function stepSize() {
+      if (total > 1) return Math.abs(slideOffset(1) - slideOffset(0)) || slides[0].offsetWidth;
+      return slides[0] ? slides[0].offsetWidth : 0;
+    }
+
+    function maxScroll() {
+      return galleryTrack.scrollWidth - galleryTrack.clientWidth;
+    }
+
+    function nearestIndex(position) {
+      let best = 0;
+      let bestDist = Infinity;
+      for (let i = 0; i < total; i++) {
+        const d = Math.abs(slideOffset(i) - position);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      }
+      return best;
+    }
+
+    function scrollToIndex(i, behavior) {
+      const index = Math.max(0, Math.min(total - 1, i));
+      galleryTrack.scrollTo({
+        left: slideOffset(index),
+        behavior: behavior || (reduceMotion ? "auto" : "smooth"),
+      });
+    }
+
+    function scrollByStep(direction) {
+      galleryTrack.scrollBy({
+        left: stepSize() * direction,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    }
+
+    gallerySyncTo = (i) => scrollToIndex(i, "auto");
+
+    /* Estado visual (atual, contador, setas, bordas) */
+    function updateState() {
+      if (!total) return;
+      const max = maxScroll();
+      const left = galleryTrack.scrollLeft;
+      const scrollable = max > EDGE;
+      const atStart = left <= EDGE;
+      const atEnd = !scrollable || left >= max - EDGE;
+
+      let idx;
+      if (!scrollable || atStart) idx = 0;
+      else if (atEnd) idx = total - 1;
+      else idx = nearestIndex(left);
+
+      slides.forEach((slide, i) => slide.classList.toggle("is-current", i === idx));
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === idx);
+        if (i === idx) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+
+      if (galleryPrev) galleryPrev.disabled = !scrollable || atStart;
+      if (galleryNext) galleryNext.disabled = !scrollable || atEnd;
+
+      if (galleryRoot) {
+        galleryRoot.classList.toggle("has-prev", scrollable && !atStart);
+        galleryRoot.classList.toggle("has-next", scrollable && !atEnd);
       }
     }
 
-    if (slides.length) setCurrentSlide(0);
+    let rafId = null;
+    galleryTrack.addEventListener(
+      "scroll",
+      () => {
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+          rafId = null;
+          updateState();
+        });
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", updateState);
 
-    function scrollByStep(direction) {
-      const slide = slides[0];
-      if (!slide) return;
-      const gap = 16;
-      const amount = (slide.getBoundingClientRect().width + gap) * direction;
-      galleryTrack.scrollBy({ left: amount, behavior: "smooth" });
+    /* Setas */
+    if (galleryPrev) {
+      galleryPrev.addEventListener("click", () => {
+        scrollByStep(-1);
+        restartAutoplay();
+      });
+    }
+    if (galleryNext) {
+      galleryNext.addEventListener("click", () => {
+        scrollByStep(1);
+        restartAutoplay();
+      });
     }
 
-    if (galleryPrev) galleryPrev.addEventListener("click", () => scrollByStep(-1));
-    if (galleryNext) galleryNext.addEventListener("click", () => scrollByStep(1));
+    /* Teclado: setas, Home e End funcionam com o foco em qualquer foto */
+    galleryTrack.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        scrollByStep(1);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        scrollByStep(-1);
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        scrollToIndex(0);
+      } else if (e.key === "End") {
+        e.preventDefault();
+        scrollToIndex(total - 1);
+      } else {
+        return;
+      }
+      restartAutoplay();
+    });
 
-    if (slides.length) {
-      let scrollTimeout;
-      galleryTrack.addEventListener(
-        "scroll",
+    /* Evita arrastar a imagem nativamente */
+    galleryTrack.addEventListener("dragstart", (e) => e.preventDefault());
+
+    /* Arrastar com o mouse (toque usa a rolagem nativa) */
+    const drag = {
+      active: false,
+      moved: false,
+      pointerId: null,
+      startX: 0,
+      startScroll: 0,
+      lastX: 0,
+      lastT: 0,
+      velocity: 0,
+    };
+    let suppressClick = false;
+
+    galleryTrack.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      drag.active = true;
+      drag.moved = false;
+      drag.pointerId = e.pointerId;
+      drag.startX = e.clientX;
+      drag.startScroll = galleryTrack.scrollLeft;
+      drag.lastX = e.clientX;
+      drag.lastT = performance.now();
+      drag.velocity = 0;
+    });
+
+    galleryTrack.addEventListener("pointermove", (e) => {
+      if (!drag.active || e.pointerId !== drag.pointerId) return;
+      const dx = e.clientX - drag.startX;
+
+      if (!drag.moved) {
+        if (Math.abs(dx) < 6) return;
+        // Só captura o ponteiro depois de arrastar de verdade,
+        // senão o clique na foto (abrir lightbox) deixa de funcionar.
+        drag.moved = true;
+        galleryTrack.classList.add("is-dragging");
+        try {
+          galleryTrack.setPointerCapture(e.pointerId);
+        } catch (err) {
+          /* ignore */
+        }
+        stopAutoplay();
+      }
+
+      galleryTrack.scrollLeft = drag.startScroll - dx;
+
+      const now = performance.now();
+      const dt = now - drag.lastT;
+      if (dt > 0) drag.velocity = (e.clientX - drag.lastX) / dt; // px/ms
+      drag.lastX = e.clientX;
+      drag.lastT = now;
+    });
+
+    function endDrag(e) {
+      if (!drag.active || (e && e.pointerId !== drag.pointerId)) return;
+      const wasMoved = drag.moved;
+      drag.active = false;
+      drag.moved = false;
+      galleryTrack.classList.remove("is-dragging");
+
+      if (wasMoved) {
+        try {
+          galleryTrack.releasePointerCapture(drag.pointerId);
+        } catch (err) {
+          /* ignore */
+        }
+        // Inércia: projeta a posição final e encaixa na foto mais próxima
+        const projected = galleryTrack.scrollLeft - drag.velocity * 220;
+        const target = Math.max(0, Math.min(maxScroll(), projected));
+        scrollToIndex(nearestIndex(target));
+
+        suppressClick = true;
+        setTimeout(() => {
+          suppressClick = false;
+        }, 0);
+        restartAutoplay();
+      }
+    }
+    galleryTrack.addEventListener("pointerup", endDrag);
+    galleryTrack.addEventListener("pointercancel", endDrag);
+
+    // Fase de captura: bloqueia o clique que "sobra" depois de um arrasto
+    galleryTrack.addEventListener(
+      "click",
+      (e) => {
+        if (suppressClick) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      },
+      true
+    );
+
+    /* Autoplay suave: pausa com mouse/foco/toque, fora da tela e com lightbox aberto */
+    const AUTOPLAY_MS = 5200;
+    let autoTimer = null;
+    let inView = false;
+    let hovering = false;
+    let focusedInside = false;
+    let touching = false;
+
+    function canAutoplay() {
+      const lb = document.getElementById("lightbox");
+      return (
+        !reduceMotion &&
+        total > 1 &&
+        inView &&
+        !hovering &&
+        !focusedInside &&
+        !touching &&
+        !document.hidden &&
+        !(lb && lb.classList.contains("is-open"))
+      );
+    }
+
+    function autoStep() {
+      if (!canAutoplay()) return;
+      const atEnd = galleryTrack.scrollLeft >= maxScroll() - EDGE;
+      if (atEnd) scrollToIndex(0);
+      else scrollByStep(1);
+    }
+
+    function stopAutoplay() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    function restartAutoplay() {
+      stopAutoplay();
+      if (reduceMotion || total < 2) return;
+      autoTimer = setInterval(autoStep, AUTOPLAY_MS);
+    }
+
+    if (galleryRoot) {
+      galleryRoot.addEventListener("pointerenter", (e) => {
+        if (e.pointerType === "mouse") hovering = true;
+      });
+      galleryRoot.addEventListener("pointerleave", (e) => {
+        if (e.pointerType === "mouse") hovering = false;
+      });
+      galleryRoot.addEventListener("focusin", () => {
+        focusedInside = true;
+      });
+      galleryRoot.addEventListener("focusout", () => {
+        focusedInside = false;
+      });
+      galleryRoot.addEventListener(
+        "touchstart",
         () => {
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            const trackRect = galleryTrack.getBoundingClientRect();
-            let closestIndex = 0;
-            let closestDistance = Infinity;
-            slides.forEach((slide, i) => {
-              const distance = Math.abs(slide.getBoundingClientRect().left - trackRect.left);
-              if (distance < closestDistance) {
-                closestDistance = distance;
-                closestIndex = i;
-              }
-            });
-            setCurrentSlide(closestIndex);
-          }, 110);
+          touching = true;
+        },
+        { passive: true }
+      );
+      galleryRoot.addEventListener(
+        "touchend",
+        () => {
+          // dá um tempo para o usuário olhar antes de voltar a avançar sozinho
+          setTimeout(() => {
+            touching = false;
+          }, 6000);
         },
         { passive: true }
       );
     }
 
-    let isDragging = false;
-    let dragMoved = false;
-    let dragStartX = 0;
-    let dragStartScroll = 0;
-
-    galleryTrack.addEventListener("pointerdown", (e) => {
-      if (e.pointerType === "touch") return;
-      isDragging = true;
-      dragMoved = false;
-      dragStartX = e.clientX;
-      dragStartScroll = galleryTrack.scrollLeft;
-      galleryTrack.classList.add("is-dragging");
-      galleryTrack.setPointerCapture(e.pointerId);
-    });
-
-    galleryTrack.addEventListener("pointermove", (e) => {
-      if (!isDragging) return;
-      const delta = e.clientX - dragStartX;
-      if (Math.abs(delta) > 5) dragMoved = true;
-      galleryTrack.scrollLeft = dragStartScroll - delta;
-    });
-
-    function endDrag() {
-      if (!isDragging) return;
-      isDragging = false;
-      galleryTrack.classList.remove("is-dragging");
-    }
-    galleryTrack.addEventListener("pointerup", endDrag);
-    galleryTrack.addEventListener("pointercancel", endDrag);
-
-    slides.forEach((slide) => {
-      slide.addEventListener(
-        "click",
-        (e) => {
-          if (dragMoved) {
-            e.stopImmediatePropagation();
-            e.preventDefault();
-          }
+    if ("IntersectionObserver" in window) {
+      const viewObserver = new IntersectionObserver(
+        (entries) => {
+          inView = entries[0].isIntersecting;
         },
-        true
+        { threshold: 0.35 }
       );
-    });
+      viewObserver.observe(galleryTrack);
+    } else {
+      inView = true;
+    }
+
+    updateState();
+    restartAutoplay();
   }
 
-  /* ---------- Gallery lightbox ---------- */
+  /* ============================================================
+     LIGHTBOX (v3)
+     - imagem com transição e preload das vizinhas
+     - swipe no celular, foco preso dentro do modal
+     - ao fechar devolve o foco e sincroniza o carrossel
+     ============================================================ */
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightboxImage");
   const lightboxCaption = document.getElementById("lightboxCaption");
@@ -525,67 +769,144 @@
   const lightboxNext = document.getElementById("lightboxNext");
   const galleryItems = Array.from(document.querySelectorAll(".gallery__item"));
   let currentGalleryIndex = 0;
+  let lastFocusedEl = null;
 
-  function renderLightboxItem(index) {
-    const item = galleryItems[index];
-    if (!item) return;
-    const caption = item.getAttribute("data-caption") || "";
-    const imgEl = item.querySelector("img");
-
-    lightboxImage.innerHTML = "";
-    if (imgEl) {
-      const clone = imgEl.cloneNode(true);
-      clone.style.width = "100%";
-      clone.style.height = "100%";
-      clone.style.objectFit = "cover";
-      clone.style.borderRadius = "18px";
-      lightboxImage.appendChild(clone);
-    } else {
-      lightboxImage.textContent = caption || "Foto";
-    }
-
-    if (lightboxCaption) lightboxCaption.textContent = caption;
-    currentGalleryIndex = index;
-  }
+  /* Esc fecha o menu mobile mesmo se não houver lightbox */
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (navMenu && navMenu.classList.contains("active")) closeMenu();
+  });
 
   if (lightbox && lightboxImage && galleryItems.length > 0) {
-    galleryItems.forEach((item, index) => {
-      item.addEventListener("click", () => {
-        renderLightboxItem(index);
-        lightbox.classList.add("is-open");
-        lightbox.setAttribute("aria-hidden", "false");
-        body.classList.add("no-scroll");
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", "Foto ampliada");
+
+    const preloaded = new Set();
+    function preload(src) {
+      if (!src || preloaded.has(src)) return;
+      preloaded.add(src);
+      const img = new Image();
+      img.src = src;
+    }
+
+    function renderLightboxItem(index, direction) {
+      const item = galleryItems[index];
+      if (!item) return;
+      const caption = item.getAttribute("data-caption") || "";
+      const imgEl = item.querySelector("img");
+
+      lightboxImage.replaceChildren();
+      lightboxImage.dataset.dir = direction > 0 ? "next" : direction < 0 ? "prev" : "";
+
+      if (imgEl) {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = imgEl.currentSrc || imgEl.src;
+        img.alt = imgEl.alt || caption;
+        lightboxImage.appendChild(img);
+      } else {
+        lightboxImage.textContent = caption || "Foto";
+      }
+
+      currentGalleryIndex = index;
+
+      // pré-carrega as vizinhas para a troca ser instantânea
+      const n = galleryItems.length;
+      [(index + 1) % n, (index - 1 + n) % n].forEach((i) => {
+        const neighbor = galleryItems[i].querySelector("img");
+        if (neighbor) preload(neighbor.currentSrc || neighbor.src);
       });
-    });
+    }
+
+    function openLightbox(index, trigger) {
+      lastFocusedEl = trigger || document.activeElement;
+      renderLightboxItem(index, 0);
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      body.classList.add("no-scroll");
+      if (lightboxClose) lightboxClose.focus({ preventScroll: true });
+    }
+
+    function closeLightbox() {
+      if (!lightbox.classList.contains("is-open")) return;
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      if (!body.classList.contains("nav-open")) body.classList.remove("no-scroll");
+
+      // leva o carrossel até a foto que estava sendo vista
+      if (gallerySyncTo) gallerySyncTo(currentGalleryIndex);
+
+      if (lastFocusedEl && typeof lastFocusedEl.focus === "function") {
+        lastFocusedEl.focus({ preventScroll: true });
+      }
+    }
 
     function showNext(direction) {
-      const nextIndex = (currentGalleryIndex + direction + galleryItems.length) % galleryItems.length;
-      renderLightboxItem(nextIndex);
+      const n = galleryItems.length;
+      renderLightboxItem((currentGalleryIndex + direction + n) % n, direction);
     }
+
+    galleryItems.forEach((item, index) => {
+      item.addEventListener("click", () => openLightbox(index, item));
+    });
 
     if (lightboxPrev) lightboxPrev.addEventListener("click", () => showNext(-1));
     if (lightboxNext) lightboxNext.addEventListener("click", () => showNext(1));
-
-    function closeLightbox() {
-      lightbox.classList.remove("is-open");
-      lightbox.setAttribute("aria-hidden", "true");
-      body.classList.remove("no-scroll");
-    }
-
     if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
 
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) closeLightbox();
     });
 
+    /* Swipe no celular */
+    let lbTouchX = 0;
+    let lbTouchY = 0;
+    lightbox.addEventListener(
+      "touchstart",
+      (e) => {
+        lbTouchX = e.touches[0].clientX;
+        lbTouchY = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+    lightbox.addEventListener(
+      "touchend",
+      (e) => {
+        const dx = e.changedTouches[0].clientX - lbTouchX;
+        const dy = e.changedTouches[0].clientY - lbTouchY;
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+        showNext(dx < 0 ? 1 : -1);
+      },
+      { passive: true }
+    );
+
+    /* Teclado + foco preso dentro do modal */
     document.addEventListener("keydown", (e) => {
-      if (!lightbox.classList.contains("is-open")) {
-        if (e.key === "Escape") closeMenu();
-        return;
+      if (!lightbox.classList.contains("is-open")) return;
+
+      if (e.key === "Escape") {
+        closeLightbox();
+      } else if (e.key === "ArrowLeft") {
+        showNext(-1);
+      } else if (e.key === "ArrowRight") {
+        showNext(1);
+      } else if (e.key === "Tab") {
+        const focusables = [lightboxClose, lightboxPrev, lightboxNext].filter(Boolean);
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        } else if (!focusables.includes(document.activeElement)) {
+          e.preventDefault();
+          first.focus();
+        }
       }
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") showNext(-1);
-      if (e.key === "ArrowRight") showNext(1);
     });
   }
 })();
